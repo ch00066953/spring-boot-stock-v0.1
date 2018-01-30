@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="GB2312"?>
+<downloadConfig>
+	<paras>
+		<para id = "root">E:\\stock</para>
+	</paras>
+	
+	<paths>
+		<path id ="mainreport">
+			<name>mainreport</name>
+			<url>http://basic.10jqka.com.cn/new/{$stock}/xls/mainreport.xls</url>
+			<day>E:\\stock\\mainreport\\{$today}\\{$stock}.xls</day>
+			<main>E:\\stock\\mainreport\\main\\{$stock}.xls</main>
+			<remark>主报表按报告</remark>
+		</path>
+		
+		<path id ="mainyear">
+			<name>mainyear</name>
+			<url>http://basic.10jqka.com.cn/new/{$stock}/xls/mainyear.xls</url>
+			<day>E:\\stock\\mainyear\\{$today}\\{$stock}.xls</day>
+			<main>E:\\stock\\mainyear\\main\\{$stock}.xls</main>
+			<remark>主报表按年分</remark>
+		</path>
+		
+		<path id ="mainsimple">
+			<name>mainsimple</name>
+			<url>http://basic.10jqka.com.cn/new/{$stock}/xls/mainsimple.xls</url>
+			<day>E:\\stock\\mainsimple\\{$today}\\{$stock}.xls</day>
+			<main>E:\\stock\\mainsimple\\main\\{$stock}.xls</main>
+			<remark>主报表按月份</remark>
+		</path>
+		
+		<path id ="allmarket_yh"><!--  -->
+			<name>allmarket</name>
+			<url>http://ichart.finance.yahoo.com/table.csv?s={$stockall}</url><!--需要ss sz  -->
+			<day>E:\\stock\\allmarket_yh\\{$today}\\{$stock}.csv</day>
+			<main>E:\\stock\\allmarket_yh\\main\\{$stock}.csv</main>
+			<remark>每日市价数据.雅虎，2018年发行不能用了</remark>
+		</path>
+		
+		<path id ="allmarket_wy">
+			<name>allmarket_wy</name>
+			<url>http://quotes.money.163.com/service/chddata.html?code={$hstype}{$stock}&start={$begindate}&end={$enddate}&fields={$row}</url><!--需要ss sz  -->
+			<day>E:\\stock\\allmarket_wy\\{$today}\\{$stock}.csv</day>
+			<main>E:\\stock\\allmarket_wy\\main\\{$stock}.csv</main>
+			<remark>每日市价数据.网易</remark>
+		</path>
+		
+		
+		<path id ="capital">
+			<name>capital</name>
+			<url>http://basic.10jqka.com.cn/{$stock}/equity.html#astockchange</url>
+			<day>E:\\stock\\capital\\{$today}\\{$stock}.html</day>
+			<main>E:\\stock\\capital\\main\\{$stock}.html</main>
+			<remark>股本变化</remark>
+		</path>
+		
+		
+	</paths>
+	
+</downloadConfig>
+
