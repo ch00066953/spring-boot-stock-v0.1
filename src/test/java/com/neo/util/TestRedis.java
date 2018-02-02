@@ -12,8 +12,9 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.neo.Application;
-import com.neo.domain.User;
+import com.ch.Application;
+import com.ch.domain.User;
+
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)

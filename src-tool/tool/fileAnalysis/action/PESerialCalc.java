@@ -32,6 +32,8 @@ public class PESerialCalc {
 	HtmlTableReader htr;
 	String stock = "";
 	String perNetP = "1";
+	public List exportData = new ArrayList<Map>();
+	public LinkedHashMap map = new LinkedHashMap();
 
 	public String getPerNetP() {
 		return perNetP;
@@ -111,11 +113,13 @@ public class PESerialCalc {
 		System.out.println("初始化完成:"+stock);
 	}
 
+	/**
+	 * 五天为计算周期的方式
+	 * @throws IOException
+	 */
 	public void runFAll() throws IOException {
 		System.out.println("开始runFAll");
 		System.out.println("日期,价格,股本,净利润,PE,增长率,PEG");
-		List exportData = new ArrayList<Map>();
-	    LinkedHashMap map = new LinkedHashMap();
 	    map.put("日期", "日期");
 	    map.put("价格", "价格");
 	    map.put("股本", "股本");
@@ -176,7 +180,79 @@ public class PESerialCalc {
 	    String fileName2 = file.getName();
 	    System.out.println("文件名称：" + fileName2);
 	}
+	
+	/**
+	 * 以每月为节点的汇总计算方式
+	 * @throws IOException
+	 */
+	public void runMAll() throws IOException {
+		System.out.println("开始runMAll");
+		System.out.println("日期（月）,最高价格,最低价格,股本,净利润,最高PE,最低PE,增长率,最高PEG,最低PEG");
+		map.put("日期", "日期");
+		map.put("价格", "价格");
+		map.put("股本", "股本");
+		map.put("利润", "利润");
+		map.put("PE", "PE");
+		map.put("增长率", "增长率");
+		map.put("PEG", "PEG");
+		List<List<String>> marketList = market.listFile;
+		String mar = null;
+		String net = null;
+		double addrate = 0;
+		double pe = 0;
+		double peg = 0;
+		int cnt = 0; // 第一行为表头
+		for (List<String> market : marketList) {
+			if (cnt % 5 == 1 || cnt <= 4 && cnt > 0) {
+				try {
+					
+					mar = htr.getRCByDate(market.get(0), "变动后A股总股本(股)");
+					String toyear = StringFunction.getToday().substring(0, 4);
+					net = er.getCell("净利润", market.get(0).substring(0, 4)
+							+ "-12-31");
+					addrate = Double.valueOf(er.getCell("净利润同比增长率", market.get(0)
+							.substring(0, 4) + "-12-31"));
+					
+					pe = calcPE(market.get(4), mar, net);
+				} catch (NullPointerException e) {
+					net = perNetP;
+					addrate = calcAddRate(perNetP, er
+							.getCell("净利润", er.getsFristY()));
+					pe = calcPE(market.get(4), mar, net);
+				}catch (Exception e) {
+					// TODO: handle exception
+					System.out.println(e.getMessage());
+					continue;
+				}
+				if(addrate != 0)
+					peg = ArithUtil.div(pe, addrate, 2);
+				pe = ArithUtil.round(pe, 2);
+				addrate = ArithUtil.round(Double.valueOf(addrate), 2);
+				
+				Map row1 = new LinkedHashMap<String, String>();
+				row1.put("日期", market.get(0));
+				row1.put("价格", market.get(4));
+				row1.put("股本", mar);
+				row1.put("利润", net);
+				row1.put("PE", pe);
+				row1.put("增长率", addrate);
+				row1.put("PEG", peg);
+				exportData.add(row1);
+				System.out.println(market.get(0) + "," + market.get(4) + ","
+						+ mar + "," + net + ",\t" + pe + "," + addrate + "," + peg);
+			}
+			cnt++;
+		}
+		String path = "D:/export/";
+		File file = CSVUtils.createCSVFile(exportData, map, path, stock);
+		String fileName2 = file.getName();
+		System.out.println("文件名称：" + fileName2);
+	}
 
+	/**
+	 * 所有日期都进行计算
+	 * @throws IOException
+	 */
 	public void runAll() throws IOException {
 
 		System.out.println("开始runAll");
@@ -263,8 +339,8 @@ public class PESerialCalc {
 	}
 
 	public static void main(String[] args) throws Exception {
-		PESerialCalc p = new PESerialCalc("002450");
-		p.setPerNetP("268700");//万
+		PESerialCalc p = new PESerialCalc("300070");
+		p.setPerNetP("235000");//万
 		p.runFAll();
 	}
 

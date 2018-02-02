@@ -1,0 +1,15 @@
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: htmlhead" th:with="title='Hello'"></head>
+
+  <body>
+   <table class="table">  
+        <thead>  
+            <th th:each="userhead : ${userhead}" th:text="${userhead.key}"></th>  
+            <th th:each="userhead : ${userhead}" th:text="${userhead.value}"></th>  
+        </thead>  
+        <tbody >  
+            <td th:each="userinfo:${userinfo}" th:text="${userinfo}"></td>  
+        </tbody>  
+    </table>  
+  </body>
+</html>
