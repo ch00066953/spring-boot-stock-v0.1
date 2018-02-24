@@ -30,7 +30,7 @@ public class ReadHtml2 {
 		File f = new File("fortest.htm");
 		InputStreamReader isr1 = new InputStreamReader(new FileInputStream(f));
 		BufferedReader br = new BufferedReader(isr1);
-		// 获取html转换成String
+		// 鑾峰彇html杞崲鎴怱tring
 		table(br);
 	}
 
@@ -48,7 +48,7 @@ public class ReadHtml2 {
 		while ((s = br.readLine()) != null) {
 			AllContent = AllContent + s;
 		}
-		// 使用后HTML Parser 控件
+		// 浣跨敤鍚嶩TML Parser 鎺т欢
 		Parser myParser;
 		NodeList nodeList = null;
 		myParser = Parser.createParser(AllContent, "utf-8");
@@ -56,10 +56,10 @@ public class ReadHtml2 {
 		OrFilter lastFilter = new OrFilter();
 		lastFilter.setPredicates(new NodeFilter[] { tableFilter });
 		try {
-			// 获取标签为table的节点列表
+			// 鑾峰彇鏍囩涓簍able鐨勮妭鐐瑰垪琛�
 			nodeList = myParser.parse(lastFilter);
 			
-			// 循环读取每个table
+			// 寰幆璇诲彇姣忎釜table
 			for (int i = 0; i <= nodeList.size(); i++) {
 				if (nodeList.elementAt(i) instanceof TableTag) {
 					TableTag tag = (TableTag) nodeList.elementAt(i);
@@ -68,17 +68,17 @@ public class ReadHtml2 {
 					TableRow[] rows = tag.getRows();
 					System.out.println("----------------------table  " + i
 					                   + "--------------------------------");
-					// 循环读取每一行
+					// 寰幆璇诲彇姣忎竴琛�
 					for (int j = 0; j < rows.length; j++) {
 						TableRow tr = (TableRow) rows[j];
 						TableColumn[] td = tr.getColumns();
 						TableHeader[] th = tr.getHeaders();
-						// 读取每行的单元格内容
+						// 璇诲彇姣忚鐨勫崟鍏冩牸鍐呭
 						for (int k = 0; k < th.length; k++) {
-							System.out.print(th[k].getStringText()+"\t");// （按照自己需要的格式输出）
+							System.out.print(th[k].getStringText()+"\t");// 锛堟寜鐓ц嚜宸遍渶瑕佺殑鏍煎紡杈撳嚭锛�
 						}
 						for (int k = 0; k < td.length; k++) {
-							System.out.print(td[k].getStringText()+"\t");// （按照自己需要的格式输出）
+							System.out.print(td[k].getStringText()+"\t");// 锛堟寜鐓ц嚜宸遍渶瑕佺殑鏍煎紡杈撳嚭锛�
 						}
 						System.out.println("");
 					}

@@ -64,7 +64,7 @@ public class HtmlTableReader {
 	}
 	
 	/**
-	 * 获取表体头
+	 * 获取表体
 	 */
 	private void readBody() {
 		int i = 1;

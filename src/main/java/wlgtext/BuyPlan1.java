@@ -29,7 +29,7 @@ public class BuyPlan1 {
 	}
 	static int c = 1;
 	
-	static String sDate = "2013-02-08,五";
+	static String sDate = "2013-02-08,浜�";
 	static String sTable = "wlg1";
 	static double dUP = 0.3;
 	static double dDown = 0.1;
@@ -73,18 +73,18 @@ public class BuyPlan1 {
 					sum = sSecondvalue = sBeginvalue = g;
 					sAddvalue = stock.buypoint(g);
 					sEndvalue = stock.sellpoint(g);
-					System.out.println("开始~每次加的倍数"+c);
-					System.out.println("开始~总共金额:"+sum+"加仓金额:"+sAddvalue+"卖出金额:"+sEndvalue+" 开始时间"+ w);
+					System.out.println("寮�濮媬姣忔鍔犵殑鍊嶆暟"+c);
+					System.out.println("寮�濮媬鎬诲叡閲戦:"+sum+"鍔犱粨閲戦:"+sAddvalue+"鍗栧嚭閲戦:"+sEndvalue+" 寮�濮嬫椂闂�"+ w);
 					list.add(sum);
 				}else {
 					if (g > sEndvalue){ 
 						sBackvalue = g *hand;
-						System.out.println("——————————————————————————————————————————————————————————————————————————");
-						System.out.println("当前金额："+g);
-						System.out.println("结束~加仓次数:"+add+" 总共金额:"+sum+"加仓金额:"+sAddvalue+"卖出金额:"+sEndvalue+"回收金额:"+sBackvalue+"结束时间"+w);
-						System.out.println("获利比例:"+(sBackvalue-sum)/sum * 100 + "% 获利金额:" +(sBackvalue-sum) * 100);
-						System.out.println("最高花费金额："+sum*100+"元");
-						System.out.println("花费时间："+i/20+"月");
+						System.out.println("鈥斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺��");
+						System.out.println("褰撳墠閲戦锛�"+g);
+						System.out.println("缁撴潫~鍔犱粨娆℃暟:"+add+" 鎬诲叡閲戦:"+sum+"鍔犱粨閲戦:"+sAddvalue+"鍗栧嚭閲戦:"+sEndvalue+"鍥炴敹閲戦:"+sBackvalue+"缁撴潫鏃堕棿"+w);
+						System.out.println("鑾峰埄姣斾緥:"+(sBackvalue-sum)/sum * 100 + "% 鑾峰埄閲戦:" +(sBackvalue-sum) * 100);
+						System.out.println("鏈�楂樿姳璐归噾棰濓細"+sum*100+"鍏�");
+						System.out.println("鑺辫垂鏃堕棿锛�"+i/20+"鏈�");
 						System.out.println(list);
 						return ;
 						}
@@ -97,15 +97,15 @@ public class BuyPlan1 {
 						hand += stock.Opening(add);
 						sBackvalue =  g *hand*1.20;
 						System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+g);
-						System.out.println("倍数："+stock.Opening(add));
-						System.out.println("当前金额："+g);
-						System.out.println("加仓次数:"+add+"总共金额:"+sum+"加仓金额:"+sAddvalue+"卖出金额:"+sEndvalue+"回收金额:"+sBackvalue+"加仓时间"+w);
+						System.out.println("鍊嶆暟锛�"+stock.Opening(add));
+						System.out.println("褰撳墠閲戦锛�"+g);
+						System.out.println("鍔犱粨娆℃暟:"+add+"鎬诲叡閲戦:"+sum+"鍔犱粨閲戦:"+sAddvalue+"鍗栧嚭閲戦:"+sEndvalue+"鍥炴敹閲戦:"+sBackvalue+"鍔犱粨鏃堕棿"+w);
 
 					}
 				}
 				
 				i++;
-				System.out.println("次数"+i+" 当前金额"+g+"总共金额:"+sum);
+				System.out.println("娆℃暟"+i+" 褰撳墠閲戦"+g+"鎬诲叡閲戦:"+sum);
 			}
 			
 		} catch (SQLException e) {
@@ -118,12 +118,12 @@ public class BuyPlan1 {
 			conn.close();
 		}
 		sBackvalue = g *hand;
-		System.out.println("——————————————————————————————————————————————————————————————————————————");
-		System.out.println("当前金额："+g);
-		System.out.println("timeout~加仓次数:"+add+" 总共金额:"+sum+"加仓金额:"+sAddvalue+"卖出金额:"+sEndvalue+"回收金额:"+sBackvalue+"结束时间"+w);
-		System.out.println("获利比例:"+(sBackvalue-sum)/sum * 100 + "% 获利金额:" +(sBackvalue-sum) * 100);
-		System.out.println("最高花费金额："+sum*100+"元");
-		System.out.println("花费时间："+i/20+"月");
+		System.out.println("鈥斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺�斺��");
+		System.out.println("褰撳墠閲戦锛�"+g);
+		System.out.println("timeout~鍔犱粨娆℃暟:"+add+" 鎬诲叡閲戦:"+sum+"鍔犱粨閲戦:"+sAddvalue+"鍗栧嚭閲戦:"+sEndvalue+"鍥炴敹閲戦:"+sBackvalue+"缁撴潫鏃堕棿"+w);
+		System.out.println("鑾峰埄姣斾緥:"+(sBackvalue-sum)/sum * 100 + "% 鑾峰埄閲戦:" +(sBackvalue-sum) * 100);
+		System.out.println("鏈�楂樿姳璐归噾棰濓細"+sum*100+"鍏�");
+		System.out.println("鑺辫垂鏃堕棿锛�"+i/20+"鏈�");
 		System.out.println(list);
 	}
 	

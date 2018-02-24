@@ -14,7 +14,7 @@ public class StockController {
 	  @RequestMapping("/stock")
 		public String stock(Locale locale, Model model) throws Exception {
 
-		  PESerialCalc p = new PESerialCalc("300070");
+		  	PESerialCalc p = new PESerialCalc("300070");
 			p.setPerNetP("235000");//万
 			p.runFAll();
 			
@@ -24,4 +24,15 @@ public class StockController {
 			return "pages/stock";
 		}
 
+	  @RequestMapping("/stock1")
+		public String stock1(Locale locale, Model model) throws Exception {
+
+			return "stock1";
+		}
+	  
+	  @RequestMapping("/load")
+		public String load(Locale locale, Model model) throws Exception {
+
+			return "load";
+		}
 }

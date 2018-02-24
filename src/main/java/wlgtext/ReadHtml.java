@@ -25,23 +25,23 @@ public class ReadHtml {
 	}
 	
 	/** 
-     * 根据提供的URL，获取此URL对应网页的纯文本信息 
-     * @param url 提供的URL链接 
-     * @return RL对应网页的纯文本信息 
+     * 鏍规嵁鎻愪緵鐨刄RL锛岃幏鍙栨URL瀵瑰簲缃戦〉鐨勭函鏂囨湰淇℃伅 
+     * @param url 鎻愪緵鐨刄RL閾炬帴 
+     * @return RL瀵瑰簲缃戦〉鐨勭函鏂囨湰淇℃伅 
      * @throws ParserException 
      */  
     public static String getText(String url)throws ParserException{  
         StringBean sb = new StringBean();  
           
-        //设置不需要得到页面所包含的链接信息  
+        //璁剧疆涓嶉渶瑕佸緱鍒伴〉闈㈡墍鍖呭惈鐨勯摼鎺ヤ俊鎭�  
         sb.setLinks(false);  
-        //设置将不间断空格由正规空格所替代  
+        //璁剧疆灏嗕笉闂存柇绌烘牸鐢辨瑙勭┖鏍兼墍鏇夸唬  
         sb.setReplaceNonBreakingSpaces(true);  
-        //设置将一序列空格由一个单一空格所代替  
+        //璁剧疆灏嗕竴搴忓垪绌烘牸鐢变竴涓崟涓�绌烘牸鎵�浠ｆ浛  
         sb.setCollapse(true);  
-        //传入要解析的URL  
+        //浼犲叆瑕佽В鏋愮殑URL  
         sb.setURL(url);  
-        //返回解析后的网页纯文本信息  
+        //杩斿洖瑙ｆ瀽鍚庣殑缃戦〉绾枃鏈俊鎭�  
         return sb.getStrings();  
     }  
 }

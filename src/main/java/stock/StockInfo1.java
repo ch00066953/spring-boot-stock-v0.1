@@ -17,10 +17,10 @@ import tool.StringFunction;
 
 import connect.JdbcConnect;
 
-public class StockInfo {
+public class StockInfo1 {
 
 	/**
-	 * ²éÑ¯ËùÓĞstock
+	 * æŸ¥è¯¢æ‰€æœ‰stock
 	 * @return
 	 * @throws SQLException 
 	 */
@@ -48,7 +48,7 @@ public class StockInfo {
 	}
 	
 	/**
-	 * ²éÑ¯Î´¼ì²éµÄstock
+	 * æŸ¥è¯¢æœªæ£€æŸ¥çš„stock
 	 * @return
 	 * @throws SQLException 
 	 */
@@ -80,7 +80,7 @@ public class StockInfo {
 	}
 	
 	/**
-	 * µ±Ìì»¹Î´¼ì²âÊıÁ¿
+	 * å½“å¤©è¿˜æœªæ£€æµ‹æ•°é‡
 	 * @return
 	 * @throws SQLException
 	 */
@@ -96,7 +96,7 @@ public class StockInfo {
 	}
 	
 	/**
-	 * »ñÈ¡µ¥¸ö¼ÇÂ¼
+	 * è·å–å•ä¸ªè®°å½•
 	 * @param stockno
 	 * @return
 	 * @throws SQLException

@@ -39,7 +39,7 @@
 		
 		<path id ="allmarket_wy">
 			<name>allmarket_wy</name>
-			<url>http://quotes.money.163.com/service/chddata.html?code={$hstype}{$stock}&start={$begindate}&end={$enddate}&fields={$row}</url><!--需要ss sz  -->
+			<url>http://quotes.money.163.com/service/chddata.html?code={$hstype}{$stock}&amp;start={$begindate}&amp;end={$enddate}&amp;fields={$row}</url><!--需要ss sz  -->
 			<day>E:\\stock\\allmarket_wy\\{$today}\\{$stock}.csv</day>
 			<main>E:\\stock\\allmarket_wy\\main\\{$stock}.csv</main>
 			<remark>每日市价数据.网易</remark>
@@ -52,6 +52,24 @@
 			<day>E:\\stock\\capital\\{$today}\\{$stock}.html</day>
 			<main>E:\\stock\\capital\\main\\{$stock}.html</main>
 			<remark>股本变化</remark>
+		</path>
+		
+		
+		<path id ="szstock">
+			<name>szstock</name>
+			<url>http://www.szse.cn/szseWeb/ShowReport.szse?SHOWTYPE=xlsx&amp;CATALOGID=1110</url>
+			<day>E:\\stock\\szstock\\{$today}\\szstock.xlsx</day>
+			<main>E:\\stock\\szstock\\main\\szstock.xlsx</main>
+			<remark>深圳股票代码</remark>
+		</path>
+		
+		
+		<path id ="shstock">
+			<name>shstock</name>
+			<url>http://query.sse.com.cn/security/stock/downloadStockListFile.do?csrcCode=&amp;stockCode=&amp;areaName=&amp;stockType=1</url>
+			<day>E:\\stock\\shstock\\{$today}\\szstock.xlsx</day>
+			<main>E:\\stock\\shstock\\main\\szstock.xlsx</main>
+			<remark>上海股票代码</remark>
 		</path>
 		
 		

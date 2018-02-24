@@ -21,20 +21,20 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
  
 /**
- * ÎÄ¼ş²Ù×÷
+ * æ–‡ä»¶æ“ä½œ
  */
 public class CSVUtils {
  
   /**
-   * Éú³ÉÎªCVSÎÄ¼ş 
+   * ç”Ÿæˆä¸ºCVSæ–‡ä»¶ 
    * @param exportData
-   *       Ô´Êı¾İList
+   *       æºæ•°æ®List
    * @param map
-   *       csvÎÄ¼şµÄÁĞ±íÍ·map
+   *       csvæ–‡ä»¶çš„åˆ—è¡¨å¤´map
    * @param outPutPath
-   *       ÎÄ¼şÂ·¾¶
+   *       æ–‡ä»¶è·¯å¾„
    * @param fileName
-   *       ÎÄ¼şÃû³Æ
+   *       æ–‡ä»¶åç§°
    * @return
    */
   @SuppressWarnings("rawtypes")
@@ -47,14 +47,14 @@ public class CSVUtils {
       if (!file.exists()) {
         file.mkdir();
       }
-      //¶¨ÒåÎÄ¼şÃû¸ñÊ½²¢´´½¨
+      //å®šä¹‰æ–‡ä»¶åæ ¼å¼å¹¶åˆ›å»º
       csvFile = File.createTempFile(fileName, ".csv", new File(outPutPath));
-      System.out.println("csvFile£º" + csvFile);
-      // UTF-8Ê¹ÕıÈ·¶ÁÈ¡·Ö¸ô·û"," 
+      System.out.println("csvFileï¼š" + csvFile);
+      // UTF-8ä½¿æ­£ç¡®è¯»å–åˆ†éš”ç¬¦"," 
       csvFileOutputStream = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
         csvFile), "UTF-8"), 1024);
-      System.out.println("csvFileOutputStream£º" + csvFileOutputStream);
-      // Ğ´ÈëÎÄ¼şÍ·²¿ 
+      System.out.println("csvFileOutputStreamï¼š" + csvFileOutputStream);
+      // å†™å…¥æ–‡ä»¶å¤´éƒ¨ 
       for (Iterator propertyIterator = map.entrySet().iterator(); propertyIterator.hasNext();) {
         java.util.Map.Entry propertyEntry = (java.util.Map.Entry) propertyIterator.next();
         csvFileOutputStream
@@ -65,7 +65,7 @@ public class CSVUtils {
         }
       }
       csvFileOutputStream.newLine();
-      // Ğ´ÈëÎÄ¼şÄÚÈİ 
+      // å†™å…¥æ–‡ä»¶å†…å®¹ 
       for (Iterator iterator = exportData.iterator(); iterator.hasNext();) {
         Object row = (Object) iterator.next();
         for (Iterator propertyIterator = map.entrySet().iterator(); propertyIterator
@@ -95,12 +95,12 @@ public class CSVUtils {
   }
  
   /**
-   * ÏÂÔØÎÄ¼ş
+   * ä¸‹è½½æ–‡ä»¶
    * @param response
    * @param csvFilePath
-   *       ÎÄ¼şÂ·¾¶
+   *       æ–‡ä»¶è·¯å¾„
    * @param fileName
-   *       ÎÄ¼şÃû³Æ
+   *       æ–‡ä»¶åç§°
    * @throws IOException
    */
   public static void exportFile(HttpServletResponse response, String csvFilePath, String fileName)
@@ -134,9 +134,9 @@ public class CSVUtils {
   }
  
   /**
-   * É¾³ı¸ÃÄ¿Â¼filePathÏÂµÄËùÓĞÎÄ¼ş
+   * åˆ é™¤è¯¥ç›®å½•filePathä¸‹çš„æ‰€æœ‰æ–‡ä»¶
    * @param filePath
-   *      ÎÄ¼şÄ¿Â¼Â·¾¶
+   *      æ–‡ä»¶ç›®å½•è·¯å¾„
    */
   public static void deleteFiles(String filePath) {
     File file = new File(filePath);
@@ -151,11 +151,11 @@ public class CSVUtils {
   }
  
   /**
-   * É¾³ıµ¥¸öÎÄ¼ş
+   * åˆ é™¤å•ä¸ªæ–‡ä»¶
    * @param filePath
-   *     ÎÄ¼şÄ¿Â¼Â·¾¶
+   *     æ–‡ä»¶ç›®å½•è·¯å¾„
    * @param fileName
-   *     ÎÄ¼şÃû³Æ
+   *     æ–‡ä»¶åç§°
    */
   public static void deleteFile(String filePath, String fileName) {
     File file = new File(filePath);
@@ -173,34 +173,34 @@ public class CSVUtils {
   }
  
   /**
-   * ²âÊÔÊı¾İ
+   * æµ‹è¯•æ•°æ®
    * @param args
    */
   @SuppressWarnings({ "rawtypes", "unchecked" })
   public static void main(String[] args) {
     List exportData = new ArrayList<Map>();
     Map row1 = new LinkedHashMap<String, String>();
-    row1.put("µÚÒ»ÁĞ", "11");
+    row1.put("ç¬¬ä¸€åˆ—", "11");
    /* row1.put("2", "12");
     row1.put("3", "13");
     row1.put("4", "14");*/
     exportData.add(row1);
     row1 = new LinkedHashMap<String, String>();
-    row1.put("µÚÒ»ÁĞ", "21");
+    row1.put("ç¬¬ä¸€åˆ—", "21");
    /* row1.put("2", "22");
     row1.put("3", "23");
     row1.put("4", "24");*/
     exportData.add(row1);
     LinkedHashMap map = new LinkedHashMap();
-    map.put("µÚÒ»ÁĞ", "µÚÒ»ÁĞ");
-   /* map.put("µÚ¶şÁĞ", "µÚ¶şÁĞ");
-    map.put("µÚÈıÁĞ", "µÚÈıÁĞ");
-    map.put("µÚËÄÁĞ", "µÚËÄÁĞ");*/
+    map.put("ç¬¬ä¸€åˆ—", "ç¬¬ä¸€åˆ—");
+   /* map.put("ç¬¬äºŒåˆ—", "ç¬¬äºŒåˆ—");
+    map.put("ç¬¬ä¸‰åˆ—", "ç¬¬ä¸‰åˆ—");
+    map.put("ç¬¬å››åˆ—", "ç¬¬å››åˆ—");*/
  
     String path = "D:/export/";
-    String fileName = "ÎÄ¼şµ¼³ö";
+    String fileName = "æ–‡ä»¶å¯¼å‡º";
     File file = CSVUtils.createCSVFile(exportData, map, path, fileName);
     String fileName2 = file.getName();
-    System.out.println("ÎÄ¼şÃû³Æ£º" + fileName2);
+    System.out.println("æ–‡ä»¶åç§°ï¼š" + fileName2);
   }
 }

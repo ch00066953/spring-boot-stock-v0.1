@@ -29,15 +29,15 @@ public class CatchRatingData {
 	    System.out.println("3"); 
 	    String buf = contentBuf.toString();  
 //	    int beginIx = buf.indexOf(strbegin,6000);  
-//	    int endIx = buf.indexOf("分",beginIx);  
+//	    int endIx = buf.indexOf("鍒�",beginIx);  
 //	    int beginIx1 = buf.indexOf(strbegin1,endIx);
-//	    int endIx1 = buf.indexOf("分",beginIx1);  
+//	    int endIx1 = buf.indexOf("鍒�",beginIx1);  
 //	    System.out.println(buf);
 //	    System.out.println(beginIx +","+ endIx +","+ strbegin.length());  
 //	    String result = buf.substring(beginIx + strbegin.length(), endIx);  
 //	    String result1 = buf.substring(beginIx1 + strbegin1.length(), endIx1);  
 //	    System.out.println(strbegin+"\n" + result); 
-//	    System.out.println("技术面：\n" + result1); 
+//	    System.out.println("鎶�鏈潰锛歕n" + result1); 
 	    CatchSYN(buf);
 	    CatchTech(buf);
 	    CatchFinan(buf);
@@ -50,9 +50,9 @@ public class CatchRatingData {
 	}  
 	
 	private String CatchSYN(String buf){
-		String strbegin = "综合诊断：";
+		String strbegin = "缁煎悎璇婃柇锛�";
 		int beginIx = buf.indexOf(strbegin,6000);  
-	    int endIx = buf.indexOf("分",beginIx); 
+	    int endIx = buf.indexOf("鍒�",beginIx); 
 	    String result = buf.substring(beginIx + strbegin.length(), endIx);  
 	    ix = endIx;
 	    System.out.println(strbegin+"\n" + result); 
@@ -62,41 +62,41 @@ public class CatchRatingData {
 	
 	private String CatchTech(String buf){
 //		String strBegin = "<div class=\"label\">";
-//		String strEnd = "分";
+//		String strEnd = "鍒�";
 //		int beginIx = buf.indexOf(strBegin,ix);  
 //	    int endIx = buf.indexOf(strEnd,beginIx); 
 //		String result = buf.substring(beginIx + strBegin.length(), endIx);
 //		ix = endIx;
 //		return result;
-		System.out.println("技术面："); 
+		System.out.println("鎶�鏈潰锛�"); 
 		String result = CatchOther(buf);
 		sRating[1] = result;
 		return result;
 	}
 	
 	private String CatchFinan(String buf){
-		System.out.println("资金面："); 
+		System.out.println("璧勯噾闈細"); 
 		String result = CatchOther(buf);
 		sRating[2] = result;
 		return result;
 	}
 	
 	private String CatchInfo(String buf){
-		System.out.println("消息面："); 
+		System.out.println("娑堟伅闈細"); 
 		String result = CatchOther(buf);
 		sRating[3] = result;
 		return result;
 	}
 	
 	private String CatchTrade(String buf){
-		System.out.println("行业面："); 
+		System.out.println("琛屼笟闈細"); 
 		String result = CatchOther(buf);
 		sRating[4] = result;
 		return result;
 	}
 	
 	private String CatchBase(String buf){
-		System.out.println("基础面："); 
+		System.out.println("鍩虹闈細"); 
 		String result = CatchOther(buf);
 		sRating[5] = result;
 		return result;
@@ -104,7 +104,7 @@ public class CatchRatingData {
 	
 	private String CatchOther(String buf){
 		String strBegin = "<div class=\"label\">";
-		String strEnd = "分";
+		String strEnd = "鍒�";
 		int beginIx = buf.indexOf(strBegin,ix);  
 	    int endIx = buf.indexOf(strEnd,beginIx); 
 		String result = buf.substring(beginIx + strBegin.length(), endIx);

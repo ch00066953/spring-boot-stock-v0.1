@@ -2,7 +2,7 @@ package download;
 
 import java.util.List;
 
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.StringFunction;
 import tool.fileAnalysis.HttpUtil;
 import tool.rep.Replace;
@@ -40,7 +40,7 @@ public class DownLoadMarket {
 	 * @throws Exception 
 	 */
 	public void getAllReport() throws Exception {
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		List<String> stockList = si.getAllStockNO();
 		int i = 0;
 		for(String stockno : stockList){

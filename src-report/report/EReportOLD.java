@@ -1,4 +1,4 @@
-package tool.fileAnalysis;
+package report;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,18 +6,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 
-public class EReport {
+public class EReportOLD {
 	public Workbook book;
 	private int sheetPage = 0;
 	public Sheet sheet;
@@ -26,10 +20,10 @@ public class EReport {
 	private String sFristY ="";
 	private int iFristY = 0;
 
-	public EReport() {
+	public EReportOLD() {
 		// TODO Auto-generated constructor stub
 	}
-	public EReport(String sPath) {
+	public EReportOLD(String sPath) {
 		 try {
 			getReport(sPath);
 		} catch (FileNotFoundException e) {
@@ -48,16 +42,6 @@ public class EReport {
 			BiffException, IOException {
 		File file = new File(sPath);
 		book = Workbook.getWorkbook(file);
-		setSheet(sheetPage);
-		
-	}
-	public void getReportByURL(String url) throws FileNotFoundException,
-	BiffException, IOException {
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(url);
-		HttpResponse response = httpclient.execute(httpGet);
-		HttpEntity entity = response.getEntity();
-		book = Workbook.getWorkbook(entity.getContent());
 		setSheet(sheetPage);
 		
 	}
@@ -86,7 +70,7 @@ public class EReport {
 	 * @param iRow 行号
 	 * @return
 	 */
-	public String getCell(int iCol, int iRow) {
+	public String getCell(int iRow, int iCol) {
 		// TODO Auto-generated method stub
 		// 得到第一列第一行的单元格
 		Cell cell1 = sheet.getCell(iCol, iRow);
@@ -126,6 +110,7 @@ public class EReport {
 	}
 	
 	public void close() {
+		if(book != null)
 		book.close();
 	}
 	
@@ -162,7 +147,7 @@ public class EReport {
 	
 	public static void main(String[] args) {
 		String sPath = "F:\\000001.xls";
-		EReport er = new EReport(sPath);
+		EReportOLD er = new EReportOLD(sPath);
 		String a = er.getCell("净利润同比增长率", "2013-09-30");
 		System.out.println(a);
 		System.out.println(er.getCell(1,2));

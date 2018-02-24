@@ -11,10 +11,10 @@ public class JdbcConnect {
 
 	public static Connection getORAConn() {
 		String driver = "oracle.jdbc.driver.OracleDriver";
-		String url = "jdbc:oracle:thin:@192.168.1.17:1521:amarcms";// ÉèÖÃÁ¬½Ó×Ö·û´®
-		String username = "amarcms11";// ÓÃ»§Ãû
-		String password = "amarcms11";// ÃÜÂë
-		Connection conn = null; // ´´½¨Êı¾İ¿âÁ¬½Ó¶ÔÏó
+		String url = "jdbc:oracle:thin:@192.168.1.17:1521:amarcms";// è®¾ç½®è¿æ¥å­—ç¬¦ä¸²
+		String username = "amarcms11";// ç”¨æˆ·å
+		String password = "amarcms11";// å¯†ç 
+		Connection conn = null; // åˆ›å»ºæ•°æ®åº“è¿æ¥å¯¹è±¡
 		try {
 			Class.forName(driver);
 			// new oracle.jdbc.driver.OracleDriver();
@@ -30,10 +30,10 @@ public class JdbcConnect {
 	
 	public static Connection getDB2Conn() {
 		String driver = "com.ibm.db2.jcc.DB2Driver";
-		String url = "jdbc:db2://192.168.1.17:60000/AMARSCF:currentSchema=DB2INST2;";// ÉèÖÃÁ¬½Ó×Ö·û´®
-		String username = "db2inst2";// ÓÃ»§Ãû
-		String password = "db2inst2";// ÃÜÂë
-		Connection conn = null; // ´´½¨Êı¾İ¿âÁ¬½Ó¶ÔÏó
+		String url = "jdbc:db2://192.168.1.17:60000/AMARSCF:currentSchema=DB2INST2;";// è®¾ç½®è¿æ¥å­—ç¬¦ä¸²
+		String username = "db2inst2";// ç”¨æˆ·å
+		String password = "db2inst2";// å¯†ç 
+		Connection conn = null; // åˆ›å»ºæ•°æ®åº“è¿æ¥å¯¹è±¡
 		try {
 			Class.forName(driver);
 			// new oracle.jdbc.driver.OracleDriver();
@@ -49,10 +49,10 @@ public class JdbcConnect {
 
 	public static Connection getMYConn() {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/wedding";// ÉèÖÃÁ¬½Ó×Ö·û´®
-		String username = "root";// ÓÃ»§Ãû
-		String password = "MySQL55";// ÃÜÂë
-		Connection conn = null; // ´´½¨Êı¾İ¿âÁ¬½Ó¶ÔÏó
+		String url = "jdbc:mysql://localhost:3306/wedding";// è®¾ç½®è¿æ¥å­—ç¬¦ä¸²
+		String username = "root";// ç”¨æˆ·å
+		String password = "MySQL55";// å¯†ç 
+		Connection conn = null; // åˆ›å»ºæ•°æ®åº“è¿æ¥å¯¹è±¡
 		try {
 			Class.forName(driver);
 			// new oracle.jdbc.driver.OracleDriver();
@@ -68,10 +68,10 @@ public class JdbcConnect {
 
 	public static Connection getStockConn() throws SQLException {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/stock";// ÉèÖÃÁ¬½Ó×Ö·û´®
-		String username = "stock";// ÓÃ»§Ãû
-		String password = "stock";// ÃÜÂë
-		Connection conn = null; // ´´½¨Êı¾İ¿âÁ¬½Ó¶ÔÏó
+		String url = "jdbc:mysql://localhost:3306/stock";// è®¾ç½®è¿æ¥å­—ç¬¦ä¸²
+		String username = "stock";// ç”¨æˆ·å
+		String password = "stock";// å¯†ç 
+		Connection conn = null; // åˆ›å»ºæ•°æ®åº“è¿æ¥å¯¹è±¡
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
@@ -86,10 +86,10 @@ public class JdbcConnect {
 
 	public static Connection getSAEConn() {
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_stockwin?useUnicode=true&amp;characterEncoding=GBK&amp;rewriteBatchedStatements=true&amp;useOldAliasMetadataBehavior=true";// ÉèÖÃÁ¬½Ó×Ö·û´®
-		String username = "x1nly3jx04";//ÓÃ»§Ãû
-		String password = "ylm1y0hmjwh12h2ki12lmyz4wj2mx1zxkxy5wjkx";//ÃÜÂë
-		Connection conn = null; //´´½¨Êı¾İ¿âÁ¬½Ó¶ÔÏó
+		String url = "jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_stockwin?useUnicode=true&amp;characterEncoding=GBK&amp;rewriteBatchedStatements=true&amp;useOldAliasMetadataBehavior=true";// è®¾ç½®è¿æ¥å­—ç¬¦ä¸²
+		String username = "x1nly3jx04";//ç”¨æˆ·å
+		String password = "ylm1y0hmjwh12h2ki12lmyz4wj2mx1zxkxy5wjkx";//å¯†ç 
+		Connection conn = null; //åˆ›å»ºæ•°æ®åº“è¿æ¥å¯¹è±¡
 		try {
 			Class.forName(driver);
 			// new oracle.jdbc.driver.OracleDriver();
@@ -108,8 +108,8 @@ public class JdbcConnect {
 	
 	public static Connection getConn() throws SQLException {
 		if (conn == null || conn.isClosed()) {
-			conn = JdbcConnect.getStockConn(); // Í³Ò»¹ÜÀí
-//			conn = JdbcConnect.getSAEConn(); // Í³Ò»¹ÜÀí
+			conn = JdbcConnect.getStockConn(); // ç»Ÿä¸€ç®¡ç†
+//			conn = JdbcConnect.getSAEConn(); // ç»Ÿä¸€ç®¡ç†
 		}
 		return conn;
 	}

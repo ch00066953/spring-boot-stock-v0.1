@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.mapper.StockInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ch.pojo.StockInfo">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="CompAbbre" jdbcType="VARCHAR" property="compabbre" />
+    <result column="CompName" jdbcType="VARCHAR" property="compname" />
+    <result column="EnglishName" jdbcType="VARCHAR" property="englishname" />
+    <result column="RegAdd" jdbcType="VARCHAR" property="regadd" />
+    <result column="SharesCode" jdbcType="VARCHAR" property="sharescode" />
+    <result column="SharesAddre" jdbcType="VARCHAR" property="sharesaddre" />
+    <result column="TimeMarket" jdbcType="VARCHAR" property="timemarket" />
+    <result column="TotalEquity" jdbcType="VARCHAR" property="totalequity" />
+    <result column="FlowEquity" jdbcType="VARCHAR" property="flowequity" />
+    <result column="BSharesCode" jdbcType="VARCHAR" property="bsharescode" />
+    <result column="BSharesAddre" jdbcType="VARCHAR" property="bsharesaddre" />
+    <result column="BTimeMarket" jdbcType="VARCHAR" property="btimemarket" />
+    <result column="BTotalEquity" jdbcType="VARCHAR" property="btotalequity" />
+    <result column="BFlowEquity" jdbcType="VARCHAR" property="bflowequity" />
+    <result column="Area" jdbcType="VARCHAR" property="area" />
+    <result column="Province" jdbcType="VARCHAR" property="province" />
+    <result column="City" jdbcType="VARCHAR" property="city" />
+    <result column="Website" jdbcType="VARCHAR" property="website" />
+    <result column="Industry" jdbcType="VARCHAR" property="industry" />
+    <result column="industry2" jdbcType="VARCHAR" property="industry2" />
+    <result column="industry3" jdbcType="VARCHAR" property="industry3" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CompAbbre, CompName, EnglishName, RegAdd, SharesCode, SharesAddre, TimeMarket, 
+    TotalEquity, FlowEquity, BSharesCode, BSharesAddre, BTimeMarket, BTotalEquity, BFlowEquity, 
+    Area, Province, City, Website, Industry, industry2, industry3, status
+  </sql>
+  <select id="selectByExample" parameterType="com.ch.pojo.StockInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from stock_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from stock_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from stock_info
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ch.pojo.StockInfoExample">
+    delete from stock_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ch.pojo.StockInfo">
+    insert into stock_info (ID, CompAbbre, CompName, 
+      EnglishName, RegAdd, SharesCode, 
+      SharesAddre, TimeMarket, TotalEquity, 
+      FlowEquity, BSharesCode, BSharesAddre, 
+      BTimeMarket, BTotalEquity, BFlowEquity, 
+      Area, Province, City, 
+      Website, Industry, industry2, 
+      industry3, status)
+    values (#{id,jdbcType=VARCHAR}, #{compabbre,jdbcType=VARCHAR}, #{compname,jdbcType=VARCHAR}, 
+      #{englishname,jdbcType=VARCHAR}, #{regadd,jdbcType=VARCHAR}, #{sharescode,jdbcType=VARCHAR}, 
+      #{sharesaddre,jdbcType=VARCHAR}, #{timemarket,jdbcType=VARCHAR}, #{totalequity,jdbcType=VARCHAR}, 
+      #{flowequity,jdbcType=VARCHAR}, #{bsharescode,jdbcType=VARCHAR}, #{bsharesaddre,jdbcType=VARCHAR}, 
+      #{btimemarket,jdbcType=VARCHAR}, #{btotalequity,jdbcType=VARCHAR}, #{bflowequity,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{website,jdbcType=VARCHAR}, #{industry,jdbcType=VARCHAR}, #{industry2,jdbcType=VARCHAR}, 
+      #{industry3,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ch.pojo.StockInfo">
+    insert into stock_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="compabbre != null">
+        CompAbbre,
+      </if>
+      <if test="compname != null">
+        CompName,
+      </if>
+      <if test="englishname != null">
+        EnglishName,
+      </if>
+      <if test="regadd != null">
+        RegAdd,
+      </if>
+      <if test="sharescode != null">
+        SharesCode,
+      </if>
+      <if test="sharesaddre != null">
+        SharesAddre,
+      </if>
+      <if test="timemarket != null">
+        TimeMarket,
+      </if>
+      <if test="totalequity != null">
+        TotalEquity,
+      </if>
+      <if test="flowequity != null">
+        FlowEquity,
+      </if>
+      <if test="bsharescode != null">
+        BSharesCode,
+      </if>
+      <if test="bsharesaddre != null">
+        BSharesAddre,
+      </if>
+      <if test="btimemarket != null">
+        BTimeMarket,
+      </if>
+      <if test="btotalequity != null">
+        BTotalEquity,
+      </if>
+      <if test="bflowequity != null">
+        BFlowEquity,
+      </if>
+      <if test="area != null">
+        Area,
+      </if>
+      <if test="province != null">
+        Province,
+      </if>
+      <if test="city != null">
+        City,
+      </if>
+      <if test="website != null">
+        Website,
+      </if>
+      <if test="industry != null">
+        Industry,
+      </if>
+      <if test="industry2 != null">
+        industry2,
+      </if>
+      <if test="industry3 != null">
+        industry3,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="compabbre != null">
+        #{compabbre,jdbcType=VARCHAR},
+      </if>
+      <if test="compname != null">
+        #{compname,jdbcType=VARCHAR},
+      </if>
+      <if test="englishname != null">
+        #{englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="regadd != null">
+        #{regadd,jdbcType=VARCHAR},
+      </if>
+      <if test="sharescode != null">
+        #{sharescode,jdbcType=VARCHAR},
+      </if>
+      <if test="sharesaddre != null">
+        #{sharesaddre,jdbcType=VARCHAR},
+      </if>
+      <if test="timemarket != null">
+        #{timemarket,jdbcType=VARCHAR},
+      </if>
+      <if test="totalequity != null">
+        #{totalequity,jdbcType=VARCHAR},
+      </if>
+      <if test="flowequity != null">
+        #{flowequity,jdbcType=VARCHAR},
+      </if>
+      <if test="bsharescode != null">
+        #{bsharescode,jdbcType=VARCHAR},
+      </if>
+      <if test="bsharesaddre != null">
+        #{bsharesaddre,jdbcType=VARCHAR},
+      </if>
+      <if test="btimemarket != null">
+        #{btimemarket,jdbcType=VARCHAR},
+      </if>
+      <if test="btotalequity != null">
+        #{btotalequity,jdbcType=VARCHAR},
+      </if>
+      <if test="bflowequity != null">
+        #{bflowequity,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="industry2 != null">
+        #{industry2,jdbcType=VARCHAR},
+      </if>
+      <if test="industry3 != null">
+        #{industry3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ch.pojo.StockInfoExample" resultType="java.lang.Integer">
+    select count(*) from stock_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update stock_info
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compabbre != null">
+        CompAbbre = #{record.compabbre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.compname != null">
+        CompName = #{record.compname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englishname != null">
+        EnglishName = #{record.englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regadd != null">
+        RegAdd = #{record.regadd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sharescode != null">
+        SharesCode = #{record.sharescode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sharesaddre != null">
+        SharesAddre = #{record.sharesaddre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timemarket != null">
+        TimeMarket = #{record.timemarket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalequity != null">
+        TotalEquity = #{record.totalequity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowequity != null">
+        FlowEquity = #{record.flowequity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsharescode != null">
+        BSharesCode = #{record.bsharescode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bsharesaddre != null">
+        BSharesAddre = #{record.bsharesaddre,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btimemarket != null">
+        BTimeMarket = #{record.btimemarket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.btotalequity != null">
+        BTotalEquity = #{record.btotalequity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bflowequity != null">
+        BFlowEquity = #{record.bflowequity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        Area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        Province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        City = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.website != null">
+        Website = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry != null">
+        Industry = #{record.industry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry2 != null">
+        industry2 = #{record.industry2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industry3 != null">
+        industry3 = #{record.industry3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update stock_info
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CompAbbre = #{record.compabbre,jdbcType=VARCHAR},
+      CompName = #{record.compname,jdbcType=VARCHAR},
+      EnglishName = #{record.englishname,jdbcType=VARCHAR},
+      RegAdd = #{record.regadd,jdbcType=VARCHAR},
+      SharesCode = #{record.sharescode,jdbcType=VARCHAR},
+      SharesAddre = #{record.sharesaddre,jdbcType=VARCHAR},
+      TimeMarket = #{record.timemarket,jdbcType=VARCHAR},
+      TotalEquity = #{record.totalequity,jdbcType=VARCHAR},
+      FlowEquity = #{record.flowequity,jdbcType=VARCHAR},
+      BSharesCode = #{record.bsharescode,jdbcType=VARCHAR},
+      BSharesAddre = #{record.bsharesaddre,jdbcType=VARCHAR},
+      BTimeMarket = #{record.btimemarket,jdbcType=VARCHAR},
+      BTotalEquity = #{record.btotalequity,jdbcType=VARCHAR},
+      BFlowEquity = #{record.bflowequity,jdbcType=VARCHAR},
+      Area = #{record.area,jdbcType=VARCHAR},
+      Province = #{record.province,jdbcType=VARCHAR},
+      City = #{record.city,jdbcType=VARCHAR},
+      Website = #{record.website,jdbcType=VARCHAR},
+      Industry = #{record.industry,jdbcType=VARCHAR},
+      industry2 = #{record.industry2,jdbcType=VARCHAR},
+      industry3 = #{record.industry3,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ch.pojo.StockInfo">
+    update stock_info
+    <set>
+      <if test="compabbre != null">
+        CompAbbre = #{compabbre,jdbcType=VARCHAR},
+      </if>
+      <if test="compname != null">
+        CompName = #{compname,jdbcType=VARCHAR},
+      </if>
+      <if test="englishname != null">
+        EnglishName = #{englishname,jdbcType=VARCHAR},
+      </if>
+      <if test="regadd != null">
+        RegAdd = #{regadd,jdbcType=VARCHAR},
+      </if>
+      <if test="sharescode != null">
+        SharesCode = #{sharescode,jdbcType=VARCHAR},
+      </if>
+      <if test="sharesaddre != null">
+        SharesAddre = #{sharesaddre,jdbcType=VARCHAR},
+      </if>
+      <if test="timemarket != null">
+        TimeMarket = #{timemarket,jdbcType=VARCHAR},
+      </if>
+      <if test="totalequity != null">
+        TotalEquity = #{totalequity,jdbcType=VARCHAR},
+      </if>
+      <if test="flowequity != null">
+        FlowEquity = #{flowequity,jdbcType=VARCHAR},
+      </if>
+      <if test="bsharescode != null">
+        BSharesCode = #{bsharescode,jdbcType=VARCHAR},
+      </if>
+      <if test="bsharesaddre != null">
+        BSharesAddre = #{bsharesaddre,jdbcType=VARCHAR},
+      </if>
+      <if test="btimemarket != null">
+        BTimeMarket = #{btimemarket,jdbcType=VARCHAR},
+      </if>
+      <if test="btotalequity != null">
+        BTotalEquity = #{btotalequity,jdbcType=VARCHAR},
+      </if>
+      <if test="bflowequity != null">
+        BFlowEquity = #{bflowequity,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        Area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        Province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null">
+        Website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="industry != null">
+        Industry = #{industry,jdbcType=VARCHAR},
+      </if>
+      <if test="industry2 != null">
+        industry2 = #{industry2,jdbcType=VARCHAR},
+      </if>
+      <if test="industry3 != null">
+        industry3 = #{industry3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ch.pojo.StockInfo">
+    update stock_info
+    set CompAbbre = #{compabbre,jdbcType=VARCHAR},
+      CompName = #{compname,jdbcType=VARCHAR},
+      EnglishName = #{englishname,jdbcType=VARCHAR},
+      RegAdd = #{regadd,jdbcType=VARCHAR},
+      SharesCode = #{sharescode,jdbcType=VARCHAR},
+      SharesAddre = #{sharesaddre,jdbcType=VARCHAR},
+      TimeMarket = #{timemarket,jdbcType=VARCHAR},
+      TotalEquity = #{totalequity,jdbcType=VARCHAR},
+      FlowEquity = #{flowequity,jdbcType=VARCHAR},
+      BSharesCode = #{bsharescode,jdbcType=VARCHAR},
+      BSharesAddre = #{bsharesaddre,jdbcType=VARCHAR},
+      BTimeMarket = #{btimemarket,jdbcType=VARCHAR},
+      BTotalEquity = #{btotalequity,jdbcType=VARCHAR},
+      BFlowEquity = #{bflowequity,jdbcType=VARCHAR},
+      Area = #{area,jdbcType=VARCHAR},
+      Province = #{province,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      Website = #{website,jdbcType=VARCHAR},
+      Industry = #{industry,jdbcType=VARCHAR},
+      industry2 = #{industry2,jdbcType=VARCHAR},
+      industry3 = #{industry3,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

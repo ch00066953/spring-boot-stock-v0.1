@@ -8,7 +8,7 @@ import java.util.List;
 import parameter.Para;
 
 import stock.NxRatingInfo;
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.DateUtil;
 import tool.StringFunction;
 
@@ -107,7 +107,7 @@ public class RunRating {
 	 * @throws SQLException 
 	 */
 	public List<String> getAllStockNO() throws SQLException{
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		return si.getAllStockNO();
 	}
 	/**
@@ -116,7 +116,7 @@ public class RunRating {
 	 * @throws SQLException 
 	 */
 	public List<String> getCheckStockNO() throws SQLException{
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		return si.getCheckStockNO();
 	}
 	/**
@@ -139,7 +139,7 @@ public class RunRating {
 	}
 	
 	public String getUnstillCheckNO() throws SQLException {
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		return si.getUnstillCheckNO();
 	}
 	public static void main(String[] args) throws SQLException {

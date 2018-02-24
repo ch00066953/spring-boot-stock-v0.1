@@ -10,13 +10,13 @@ import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import tool.StringX;
+import tool.fileAnalysis.bean.TableBean;
 
-public class EReport {
+public class EReport extends TableBean{
 	public Workbook book;
 	private int sheetPage = 0;
 	public Sheet sheet;
-	public Map<String, Integer> col;
-	public Map<String, Integer> row;
 	private String sFristY ="";
 	private int iFristY = 0;
 
@@ -47,59 +47,31 @@ public class EReport {
 	}
 
 	private void initCell() {
-		int iRow = 0;
-		int iCol = 0;
-		col = new HashMap<String, Integer>();
-		row = new HashMap<String, Integer>();
-		for (; iCol < sheet.getColumns(); iCol++) {
-			col.put(getColName(iCol),iCol);
+		for (; iCol < sheet.getColumns(); ) {
+			String sCol = getColName(iCol);
+			if(StringX.isEmpty(sCol)){
+				break;
+			}
+			addHead(getColName(iCol));
 			if(iFristY == 0 && getColName(iCol).contains("-12-31")){
 				iFristY = iCol;
 				sFristY = getColName(iCol);
 			}
 		}
 
-		for (; iRow < sheet.getRows(); iRow++) {
-			row.put(getRowName(iRow),iRow);
+		for (int r = 0 ; r < sheet.getRows(); r++) {
+			String sRow = getRowName(iRow);
+			if(StringX.isEmpty(sRow)){
+				break;
+			}
+			for(int i = 0; i < iCol; i++){
+				
+				add(getSheetCell(r, i));
+				System.out.println(r+","+i);
+			}
 		}
 	}
 	
-	/**
-	 * 根据行列号获取内容
-	 * @param iCol 列号
-	 * @param iRow 行号
-	 * @return
-	 */
-	public String getCell(int iCol, int iRow) {
-		// TODO Auto-generated method stub
-		// 得到第一列第一行的单元格
-		Cell cell1 = sheet.getCell(iCol, iRow);
-		String result = cell1.getContents();
-		return result;
-
-	}
-
-	public String getCell(String sRow, String sCol) {
-		// TODO Auto-generated method stub
-		int iRow = 0;
-		int iCol = 0;
-
-//		c :for (; iCol < sheet.getColumns(); iCol++) {
-//			if(sheet.getCell(iCol, 0).getContents().equals(sCol))
-//				break c;
-//		}
-//
-//		r :for (; iRow < sheet.getRows(); iRow++) {
-//			if(sheet.getCell(0, iRow).getContents().equals(sRow))
-//				break r;
-//		}
-		iCol = getCol(sCol);
-		iRow = getRow(sRow);
-		String result = getCell(iCol,iRow );
-		return result;
-	}
-	
-
 	public Sheet getSheet() {
 		return sheet;
 	}
@@ -115,6 +87,7 @@ public class EReport {
 	}
 	
 	public String getRowName(int iRow) {
+		
 		return sheet.getCell(0, iRow).getContents();
 	}
 
@@ -122,12 +95,17 @@ public class EReport {
 		return sheet.getCell(iCol, 0).getContents();
 	}
 	
-	public int getRow(String sRow) {
-		return row.get(sRow);
+	public String getSheetCell(int iRow,int iCol) {
+		return sheet.getCell(iCol, iRow).getContents();
+	}
+	
+	
+	public int getSheetRow(String sRow) {
+		return rowno.get(sRow);
 	}
 
 	public int getCol(String sCol) {
-		return col.get(sCol);
+		return colno.get(sCol);
 	}
 	
 	public String getsFristY() {
@@ -140,13 +118,13 @@ public class EReport {
 	public int getYearNo(int i){
 		i -= 1;
 		int yearNo = iFristY + 4 * i ;
-		if (yearNo > col.size())
+		if (yearNo > colno.size())
 			return 0;
 		return yearNo;
 	}
 	
 	public static void main(String[] args) {
-		String sPath = "F:\\000001.xls";
+		String sPath = "F:\\002450.xls";
 		EReport er = new EReport(sPath);
 		String a = er.getCell("净利润同比增长率", "2013-09-30");
 		System.out.println(a);

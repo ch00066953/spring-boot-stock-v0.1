@@ -7,13 +7,13 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ch.domain.User;
-import com.ch.domain.UserRepository;
+/*import com.ch.domain.User;
+import com.ch.domain.UserRepository;*/
 
 @RestController
 public class UserController {
 	
-	@Autowired
+	/*@Autowired
 	private UserRepository userRepository;
 	
     @RequestMapping("/getUser")
@@ -30,5 +30,5 @@ public class UserController {
     	List<User> users=userRepository.findAll();
     	System.out.println("若下面没出现“无缓存的时候调用”字样且能打印出数据表示测试成功");  
         return users;
-    }
+    }*/
 }

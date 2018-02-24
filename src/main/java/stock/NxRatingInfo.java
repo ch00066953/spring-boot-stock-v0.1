@@ -15,7 +15,7 @@ import tool.StringFunction;
 
 import connect.JdbcConnect;
 /**
- * ÆÀ¼¶
+ * è¯„çº§
  * @author lgwang
  *
  */
@@ -55,7 +55,7 @@ public class NxRatingInfo {
 			for (String[] sRating  : listArray){
 				System.out.println(sRating[0]); 
 				if (sRating[0] == null){
-					System.out.println("Îª¿ÕÌø³ö£¡");
+					System.out.println("ä¸ºç©ºè·³å‡ºï¼");
 					continue;
 				}
 				pstmt.setString(1, sRating[0]);
@@ -77,7 +77,7 @@ public class NxRatingInfo {
 		}finally{
 			JdbcConnect.close(conn, pstmt);
 		}
-		System.out.println("Íê³É£¡£¡£¡"); 
+		System.out.println("å®Œæˆï¼ï¼ï¼"); 
 	}
 	public static void main(String[] args) throws SQLException {
 		String[] sRating = new String[]{null,null,null,null,null,null,null};

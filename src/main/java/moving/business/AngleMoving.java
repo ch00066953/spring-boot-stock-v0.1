@@ -5,20 +5,20 @@ import moving.*;
 public class AngleMoving {
 
 	/**
-	 * ×ÛºÏÃæ
+	 * ç»¼åˆé¢
 	 */
 	public void SYNMoving() {
-		System.out.println("×ÛºÏÃæÇ¨áã¿ªÊ¼...");
+		System.out.println("ç»¼åˆé¢è¿å¾™å¼€å§‹...");
 		RatingMoving rm = new RatingMoving(new SYN());
 		rm.excuse();
 
 	}
 	
 	/**
-	 * ¼¼ÊõÃæ
+	 * æŠ€æœ¯é¢
 	 */
 	public void TechMoving() {
-		System.out.println("¼¼ÊõÃæÇ¨áã¿ªÊ¼...");
+		System.out.println("æŠ€æœ¯é¢è¿å¾™å¼€å§‹...");
 		RatingMoving rm = new RatingMoving(new Tech());
 		rm.excuse();
 		// TODO Auto-generated method stub
@@ -26,40 +26,40 @@ public class AngleMoving {
 	}
 	
 	/**
-	 * ĞĞÒµÃæ
+	 * è¡Œä¸šé¢
 	 */
 	public void TradeMoving() {
-		System.out.println("ĞĞÒµÃæÇ¨áã¿ªÊ¼...");
+		System.out.println("è¡Œä¸šé¢è¿å¾™å¼€å§‹...");
 		RatingMoving rm = new RatingMoving(new Trade());
 		rm.excuse();
 
 	}
 	
 	/**
-	 * »ù±¾Ãæ
+	 * åŸºæœ¬é¢
 	 */
 	public void BaseMoving() {
-		System.out.println("»ù±¾ÃæÇ¨áã¿ªÊ¼...");
+		System.out.println("åŸºæœ¬é¢è¿å¾™å¼€å§‹...");
 		RatingMoving rm = new RatingMoving(new Base());
 		rm.excuse();
 
 	}
 	
 	/**
-	 * ×Ê½ğÃæ
+	 * èµ„é‡‘é¢
 	 */
 	public void FinanMoving() {
-		System.out.println("×Ê½ğÃæÇ¨áã¿ªÊ¼...");
+		System.out.println("èµ„é‡‘é¢è¿å¾™å¼€å§‹...");
 		RatingMoving rm = new RatingMoving(new Finan());
 		rm.excuse();
 
 	}
 	
 	/**
-	 * ĞÅÏ¢Ãæ
+	 * ä¿¡æ¯é¢
 	 */
 	public void InfoMoving() {
-		System.out.println("ĞÅÏ¢ÃæÇ¨áã¿ªÊ¼...");
+		System.out.println("ä¿¡æ¯é¢è¿å¾™å¼€å§‹...");
 		RatingMoving rm = new RatingMoving(new Info());
 		rm.excuse();
 

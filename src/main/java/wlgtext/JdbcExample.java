@@ -13,10 +13,10 @@ public class JdbcExample {
 
     public static Connection getConn() {
         String driver = "oracle.jdbc.driver.OracleDriver";
-        String url = "jdbc:oracle:thin:@192.168.1.17:1521:amarcms";// 设置连接字符串
-        String username = "amarcms11";//用户名
-        String password = "amarcms11";//密码
-        Connection conn = null; //创建数据库连接对象
+        String url = "jdbc:oracle:thin:@192.168.1.17:1521:amarcms";// 璁剧疆杩炴帴瀛楃涓�
+        String username = "amarcms11";//鐢ㄦ埛鍚�
+        String password = "amarcms11";//瀵嗙爜
+        Connection conn = null; //鍒涘缓鏁版嵁搴撹繛鎺ュ璞�
         try {
             Class.forName(driver);
             // new oracle.jdbc.driver.OracleDriver();
@@ -36,7 +36,7 @@ public class JdbcExample {
         Connection conn = getConn();
         int i = 0;
         String sql = "insert into users (username,password) values(?,?)";
-        PreparedStatement pstmt; // 建立一个查询对象
+        PreparedStatement pstmt; // 寤虹珛涓�涓煡璇㈠璞�
         try {
             pstmt = conn.prepareStatement(sql);
             // Statement stat = conn.createStatement();
@@ -60,7 +60,7 @@ public class JdbcExample {
         PreparedStatement pstmt;
         try {
             pstmt = conn.prepareStatement(sql);
-           // 建立一个结果集,用来保存查询出来的结果
+           // 寤虹珛涓�涓粨鏋滈泦,鐢ㄦ潵淇濆瓨鏌ヨ鍑烘潵鐨勭粨鏋�
  ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 System.out.println("name: " + rs.getString("username")
@@ -117,7 +117,7 @@ public class JdbcExample {
         return i;
     }
 
-  //主方法，进行测试
+  //涓绘柟娉曪紝杩涜娴嬭瘯
 //    public static void main(String[] args) {
 //        insert("test", "123");
 //        insert("admin", "456");

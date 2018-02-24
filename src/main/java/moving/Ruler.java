@@ -1,55 +1,55 @@
 package moving;
 
 /**
- * ³Ù±ê£¬Ç°ºó²»±Õ
- * Ğ¡ÓÚLOWµÍ
- * ´óÓÚHIGH¸ß
+ * è¿Ÿæ ‡ï¼Œå‰åä¸é—­
+ * å°äºLOWä½
+ * å¤§äºHIGHé«˜
  * @author lgwang
  *
  */
 public class Ruler {
 
 	/*
-	 * ×ÛºÏ±ê³ß
+	 * ç»¼åˆæ ‡å°º
 	 */
 	public final static String SVN_HIGH = "6.9"; 
 	public final static String SVN_LOW = "4.8"; 
 	
 	/*
-	 * ¼¼Êõ±ê³ß
+	 * æŠ€æœ¯æ ‡å°º
 	 */
 	public final static String TECH_HIGH = "7.8"; 
 	public final static String TECH_LOW = "6.8"; 
 	
 	/*
-	 * ×Ê½ğ±ê³ß
+	 * èµ„é‡‘æ ‡å°º
 	 */
 	public final static String FINAN_HIGH = "6.6"; 
 	public final static String FINAN_LOW = "2.6"; 
 	
 	/*
-	 * ÏûÏ¢±ê³ß
+	 * æ¶ˆæ¯æ ‡å°º
 	 */
 	public final static String INFO_HIGH = "6.6"; 
 	public final static String INFO_LOW = "4.8"; 
 	
 	/*
-	 * ĞĞÒµ±ê³ß
+	 * è¡Œä¸šæ ‡å°º
 	 */
 	public final static String TRADE_HIGH = "7.7"; 
 	public final static String TRADE_LOW = "6.4"; 
 	
 	/*
-	 * »ù±¾Ãæ±ê³ß
+	 * åŸºæœ¬é¢æ ‡å°º
 	 */
 	public final static String BASE_HIGH = "7.2"; 
 	public final static String BASE_LOW = "4.7"; 
 	
 	/*
-	 * ±àºÅ±êÖ¾
+	 * ç¼–å·æ ‡å¿—
 	 */
-	public final static String CHANGE_HIGH = "H"; //ÖÁ¸ß
-	public final static String CHANGE_LOW_MEDIUM = "LM"; //µÍÖÁÖĞ 
-	public final static String CHANGE_HIGH_MEDIUM = "HM"; //¸ßÖÁÖĞ
-	public final static String CHANGE_LOW = "L"; //ÖÁµÍ
+	public final static String CHANGE_HIGH = "H"; //è‡³é«˜
+	public final static String CHANGE_LOW_MEDIUM = "LM"; //ä½è‡³ä¸­ 
+	public final static String CHANGE_HIGH_MEDIUM = "HM"; //é«˜è‡³ä¸­
+	public final static String CHANGE_LOW = "L"; //è‡³ä½
 }

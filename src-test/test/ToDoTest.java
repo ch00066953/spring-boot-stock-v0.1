@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import org.junit.Test;
 
 import parameter.Para;
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.StringFunction;
 import wlgtext.MailTest;
 
@@ -28,7 +28,7 @@ public class ToDoTest {
 		String message = null;
 		String avg = null;
 		try {
-			avg = StockInfo.getTodayAvg().toString();
+			avg = StockInfo1.getTodayAvg().toString();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

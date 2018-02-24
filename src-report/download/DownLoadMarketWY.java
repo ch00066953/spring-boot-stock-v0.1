@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.DownLoad;
 import tool.StringFunction;
 import tool.fileAnalysis.CSVAnalysis;
@@ -46,7 +46,7 @@ public class DownLoadMarketWY {
 	 * @throws Exception 
 	 */
 	public void getAllReport() throws Exception {
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		List<String> stockList = si.getAllStockNO();
 		int i = 0;
 		for(String stockno : stockList){

@@ -1,13 +1,11 @@
 package download;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.List;
 
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.DownLoad;
 import tool.StringFunction;
-import tool.fileAnalysis.EReport;
 import tool.fileAnalysis.HttpUtil;
 
 public class DownLoadReport {
@@ -41,7 +39,7 @@ public class DownLoadReport {
 	 * @throws Exception 
 	 */
 	public void getAllReport() throws Exception {
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		List<String> stockList = si.getAllStockNO();
 		int i = 0;
 		for(String stockno : stockList){
@@ -90,7 +88,7 @@ public class DownLoadReport {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		List<String> s = si.getAllStockNO();
 		DownLoadReport dlr = new DownLoadReport();
 		for(String stock : s)

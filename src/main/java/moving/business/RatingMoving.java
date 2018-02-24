@@ -28,7 +28,7 @@ public class RatingMoving {
 	}
 
 	/**
-	 * 上移至高,大于
+	 * 涓婄Щ鑷抽珮,澶т簬
 	 */
 	public void movingH() {
 		String move = "H";
@@ -44,7 +44,7 @@ public class RatingMoving {
 	}
 
 	/**
-	 * 下移至低，小于
+	 * 涓嬬Щ鑷充綆锛屽皬浜�
 	 */
 	public void movingL() {
 		String move = "L";
@@ -60,7 +60,7 @@ public class RatingMoving {
 	}
 
 	/**
-	 * 高至中 ，闭包
+	 * 楂樿嚦涓� 锛岄棴鍖�
 	 */
 	public void movingHM() {
 		String move = "HM";
@@ -76,7 +76,7 @@ public class RatingMoving {
 	}
 
 	/**
-	 * 低至中，闭包
+	 * 浣庤嚦涓紝闂寘
 	 */
 	public void movingLM() {
 		String move = "LM";
@@ -91,7 +91,7 @@ public class RatingMoving {
 	}
 
 	/**
-	 * 评级该表标志
+	 * 璇勭骇璇ヨ〃鏍囧織
 	 * 
 	 * @param sql
 	 * @param move
@@ -107,10 +107,10 @@ public class RatingMoving {
 				+ move + "' where stockno = ? and Date = '" + Para.getDate() + "'";
 		int i = 0;
 
-		System.out.println("转移标志：" + move);
+		System.out.println("杞Щ鏍囧織锛�" + move);
 		System.out.println(updateSql);
 		Connection conn = null ;
-		PreparedStatement pstmt = null; // 建立一个查询对象
+		PreparedStatement pstmt = null; // 寤虹珛涓�涓煡璇㈠璞�
 		try {
 			conn = JdbcConnect.getConn();
 			conn.setAutoCommit(false);
@@ -121,9 +121,9 @@ public class RatingMoving {
 				i++;
 				// System.out.println(i);
 			}
-			System.out.println("执行插入条数：" + i);
+			System.out.println("鎵ц鎻掑叆鏉℃暟锛�" + i);
 			pstmt.executeBatch();
-			System.out.println("转移条数：" + i);
+			System.out.println("杞Щ鏉℃暟锛�" + i);
 			conn.commit();
 		} catch (SQLException e) {
 			e.printStackTrace();

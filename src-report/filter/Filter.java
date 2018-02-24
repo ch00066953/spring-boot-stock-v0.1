@@ -11,7 +11,7 @@ import download.PathMap;
 
 import jxl.read.biff.BiffException;
 import report.EReport;
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.DownLoad;
 import analyse.mainreport.ReturnEquity;
 import analyse.mainreport.ShareCapitalFund;
@@ -26,7 +26,7 @@ public class Filter {
 	String path = "E:\\stock\\20150115\\MAINREPORT\\";
 	private List<String> getAllStcok() throws SQLException {
 		// TODO Auto-generated method stub
-		StockInfo si = new StockInfo();
+		StockInfo1 si = new StockInfo1();
 		List<String> s = si.getAllStockNO();
 		return s;
 	}

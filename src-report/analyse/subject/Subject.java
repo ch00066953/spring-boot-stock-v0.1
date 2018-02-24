@@ -64,12 +64,12 @@ public class Subject implements ISubject {
 	}
 	
 	public double getCell(int iCol) {
-		String cell = er.getCell(1, iRow);
+		String cell = er.getCell(iRow, 1);
 		double value;
 		if (StringX.isEmpty(cell)){
 			value = 0;
 		}else
-			value = Double.valueOf(er.getCell(1, iRow));
+			value = Double.valueOf(er.getCell(iRow, 1));
 		return value;
 	}
 

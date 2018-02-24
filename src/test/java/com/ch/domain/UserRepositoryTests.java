@@ -1,4 +1,4 @@
-package com.neo.domain;
+package com.ch.domain;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -8,19 +8,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.ch.Application;
-import com.ch.domain.User;
-import com.ch.domain.UserRepository;
 
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserRepositoryTests {
 
-	@Autowired
+	/*@Autowired
 	private UserRepository userRepository;
 
 	@Test
@@ -36,6 +31,6 @@ public class UserRepositoryTests {
 		Assert.assertEquals(9, userRepository.findAll().size());
 		Assert.assertEquals("bb", userRepository.findByUserNameOrEmail("bb", "cc@126.com").getNickName());
 		userRepository.delete(userRepository.findByUserName("aa1"));
-	}
+	}*/
 
 }

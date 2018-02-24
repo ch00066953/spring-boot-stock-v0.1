@@ -12,12 +12,14 @@ import java.util.regex.Pattern;
 
 import download.Path;
 import download.PathMap;
+import report.EReport;
 import tool.ArithUtil;
 import tool.DownLoad;
 import tool.StringFunction;
+import tool.StringX;
 import tool.fileAnalysis.CSVAnalysis;
 import tool.fileAnalysis.CSVUtils;
-import tool.fileAnalysis.EReport;
+import tool.fileAnalysis.bean.TableBean;
 import tool.rep.Replace;
 import wlgtext.jsoup.HtmlTableReader;
 /**
@@ -188,24 +190,23 @@ public class PESerialCalc {
 	public void runMAll() throws IOException {
 		System.out.println("开始runMAll");
 		System.out.println("日期（月）,最高价格,最低价格,股本,净利润,最高PE,最低PE,增长率,最高PEG,最低PEG");
-		map.put("日期", "日期");
-		map.put("价格", "价格");
-		map.put("股本", "股本");
-		map.put("利润", "利润");
-		map.put("PE", "PE");
-		map.put("增长率", "增长率");
-		map.put("PEG", "PEG");
+		TableBean tb = new TableBean();
+		tb.initHead("日期-前,日期-后,最高价格,最低价格,股本,净利润,最高PE,最低PE,增长率,最高PEG,最低PEG");
+		tb.addTableHead();
+		LinkedHashMap<String,String> allRow = new LinkedHashMap<String,String>();
+		
 		List<List<String>> marketList = market.listFile;
 		String mar = null;
 		String net = null;
+		String sMonth = null;
+		
 		double addrate = 0;
 		double pe = 0;
 		double peg = 0;
 		int cnt = 0; // 第一行为表头
 		for (List<String> market : marketList) {
-			if (cnt % 5 == 1 || cnt <= 4 && cnt > 0) {
+			if (cnt > 0) {
 				try {
-					
 					mar = htr.getRCByDate(market.get(0), "变动后A股总股本(股)");
 					String toyear = StringFunction.getToday().substring(0, 4);
 					net = er.getCell("净利润", market.get(0).substring(0, 4)
@@ -220,35 +221,103 @@ public class PESerialCalc {
 							.getCell("净利润", er.getsFristY()));
 					pe = calcPE(market.get(4), mar, net);
 				}catch (Exception e) {
-					// TODO: handle exception
 					System.out.println(e.getMessage());
 					continue;
 				}
+				addrate = ArithUtil.round(Double.valueOf(addrate), 2);
+				
+				pe = ArithUtil.round(pe, 2);
 				if(addrate != 0)
 					peg = ArithUtil.div(pe, addrate, 2);
-				pe = ArithUtil.round(pe, 2);
-				addrate = ArithUtil.round(Double.valueOf(addrate), 2);
 				
 				Map row1 = new LinkedHashMap<String, String>();
 				row1.put("日期", market.get(0));
 				row1.put("价格", market.get(4));
 				row1.put("股本", mar);
-				row1.put("利润", net);
+				row1.put("净利润", net);
 				row1.put("PE", pe);
-				row1.put("增长率", addrate);
+				row1.put("增长率", String.valueOf(addrate));
 				row1.put("PEG", peg);
+				
+				if(finishMonth(allRow,row1)){
+					caleMonth(allRow);
+					tb.add(allRow);
+					allRow = new LinkedHashMap<String,String>();
+				}
+				addMonth(allRow,row1);
+				
 				exportData.add(row1);
-				System.out.println(market.get(0) + "," + market.get(4) + ","
-						+ mar + "," + net + ",\t" + pe + "," + addrate + "," + peg);
+				/*System.out.println(market.get(0) + "," + market.get(4) + ","
+						+ mar + "," + net + ",\t" + pe + "," + addrate + "," + peg);*/
 			}
 			cnt++;
 		}
 		String path = "D:/export/";
-		File file = CSVUtils.createCSVFile(exportData, map, path, stock);
+		File file = CSVUtils.createCSVFile(tb.getList(), tb.getList().get(0), path, stock);
 		String fileName2 = file.getName();
 		System.out.println("文件名称：" + fileName2);
 	}
 
+	public boolean finishMonth(Map<String,String> allRow,Map<String,String> row){
+		
+		if(allRow == null || allRow.size() == 0){
+			return false;
+		}
+		boolean result = false;
+		if(!row.get("日期").substring(5, 7).equals(allRow.get("日期-前").substring(5, 7))){
+			result =  true;
+		}
+		if(!allRow.get("股本").equals(row.get("股本"))){
+			result =  true;
+		}
+		return result;
+	}
+	
+	public void addMonth(Map<String,String> allRow,Map<String,String> row){
+		allRow.put("日期-后", row.get("日期"));
+		if(allRow.get("日期-前") == null){
+			allRow.put("日期-前", row.get("日期"));
+		}
+		if(allRow.get("最高价格") == null){
+			allRow.put("最高价格", row.get("价格"));
+			allRow.put("最低价格", row.get("价格"));
+		}else if (allRow.get("最高价格").compareTo(row.get("价格"))<0){
+			allRow.put("最高价格", row.get("价格"));
+		}else if ((allRow.get("最低价格").compareTo(row.get("价格"))>0 || Double.valueOf(allRow.get("最低价格")) == 0)
+				 && Double.valueOf(row.get("价格"))!=0){
+			allRow.put("最低价格", row.get("价格"));
+		}
+		if(allRow.get("净利润") == null){
+			allRow.put("净利润", row.get("净利润"));
+		}
+		if(allRow.get("股本") == null){
+			allRow.put("股本", row.get("股本"));
+		}
+		if(allRow.get("增长率") == null){
+			allRow.put("增长率", row.get("增长率"));
+		}
+	}
+	
+	public void caleMonth(Map<String,String> allRow){
+		double peH = 0;
+		double peL = 0;
+		double pegH = 0;
+		double pegL = 0;
+		double addrate = Double.valueOf(allRow.get("增长率"));
+		peH = calcPE(allRow.get("最高价格"), allRow.get("股本"), allRow.get("净利润"));
+		peL = calcPE(allRow.get("最低价格"), allRow.get("股本"), allRow.get("净利润"));
+		pegH = ArithUtil.round(peH, 2);
+		pegL = ArithUtil.round(peL, 2);
+		
+		if(addrate != 0){
+			pegH = ArithUtil.div(peH, addrate, 2);
+			pegL = ArithUtil.div(pegL, addrate, 2);
+		}
+		allRow.put("最高PE", String.valueOf(peH));
+		allRow.put("最低PE", String.valueOf(peL));
+		allRow.put("最高PEG", String.valueOf(pegH));
+		allRow.put("最低PEG", String.valueOf(pegL));
+	}
 	/**
 	 * 所有日期都进行计算
 	 * @throws IOException
@@ -341,7 +410,7 @@ public class PESerialCalc {
 	public static void main(String[] args) throws Exception {
 		PESerialCalc p = new PESerialCalc("300070");
 		p.setPerNetP("235000");//万
-		p.runFAll();
+		p.runMAll();
 	}
 
 	/*

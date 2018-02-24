@@ -11,12 +11,12 @@ import parameter.Para;
 import moving.business.AngleMoving;
 
 import rating.RunRating;
-import stock.StockInfo;
+import stock.StockInfo1;
 import tool.StringFunction;
 
 public class ToDo {
 	Timer timer;
-	boolean status = true;// 是否可执行
+	boolean status = true;// 鏄惁鍙墽琛�
 	private static ToDo uniqueInstance = null;
 
 	private ToDo() {
@@ -55,7 +55,7 @@ public class ToDo {
 				try {
 					cno = rr.checkexcuse();
 				} catch (SQLException e) {
-					MailTest.sendError("RATING错误信息！"+e.getMessage());
+					MailTest.sendError("RATING閿欒淇℃伅锛�"+e.getMessage());
 					e.printStackTrace();
 				}
 				if (i == 5 || cno == 0) {
@@ -73,12 +73,12 @@ public class ToDo {
 					String message = null;
 					String avg = null;
 					try {
-						avg = StockInfo.getTodayAvg().toString();
+						avg = StockInfo1.getTodayAvg().toString();
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-						message = "RATING FINISH 次数："+i+"|剩余："+cno+"|Rating日期："+Para.getDate()+"|当前时间"+StringFunction.getTodayNow()
+						message = "RATING FINISH 娆℃暟锛�"+i+"|鍓╀綑锛�"+cno+"|Rating鏃ユ湡锛�"+Para.getDate()+"|褰撳墠鏃堕棿"+StringFunction.getTodayNow()
 						+"|IP:"+ ip +"|avg:"+avg;
 					MailTest.sendPrompt("RATING FINISH", message);
 				}
