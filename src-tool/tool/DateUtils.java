@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -137,6 +138,9 @@ public class DateUtils {
 //		Date d = DateUtils.parseDate("Tue, 9 Nov 2010 12:45:00 GMT");
 		Date d = DateUtils.parseDate("2014/1/6");
 		System.out.println(d);
+		System.out.println(DateTime.now().plusDays(-1).toString("YYYY/MM/dd"));
 	}
+	
+	
 }
 

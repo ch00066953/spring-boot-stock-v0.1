@@ -45,33 +45,86 @@
 			<remark>每日市价数据.网易</remark>
 		</path>
 		
-		
 		<path id ="capital">
 			<name>capital</name>
 			<url>http://basic.10jqka.com.cn/{$stock}/equity.html#astockchange</url>
-			<day>E:\\stock\\capital\\{$today}\\{$stock}.html</day>
-			<main>E:\\stock\\capital\\main\\{$stock}.html</main>
+			<day>E:\\stock\\capital\\{$today}\\{$stock}_capital.html</day>
+			<main>E:\\stock\\capital\\main\\{$stock}_capital.html</main>
 			<remark>股本变化</remark>
 		</path>
 		
-		
 		<path id ="szstock">
 			<name>szstock</name>
-			<url>http://www.szse.cn/szseWeb/ShowReport.szse?SHOWTYPE=xlsx&amp;CATALOGID=1110</url>
+			<url>http://www.szse.cn/szseWeb/ShowReport.szse?SHOWTYPE=xlsx&amp;CATALOGID=1110&amp;tab2PAGENO=1&amp;ENCODE=1&amp;TABKEY=tab2</url>
 			<day>E:\\stock\\szstock\\{$today}\\szstock.xlsx</day>
 			<main>E:\\stock\\szstock\\main\\szstock.xlsx</main>
 			<remark>深圳股票代码</remark>
 		</path>
 		
-		
 		<path id ="shstock">
 			<name>shstock</name>
 			<url>http://query.sse.com.cn/security/stock/downloadStockListFile.do?csrcCode=&amp;stockCode=&amp;areaName=&amp;stockType=1</url>
-			<day>E:\\stock\\shstock\\{$today}\\szstock.xlsx</day>
-			<main>E:\\stock\\shstock\\main\\szstock.xlsx</main>
+			<day>E:\\stock\\shstock\\{$today}\\shstock.xls</day>
+			<main>E:\\stock\\shstock\\main\\shstock.xls</main>
 			<remark>上海股票代码</remark>
 		</path>
 		
+		<path id ="industry">
+			<name>industry</name>
+			<url>http://basic.10jqka.com.cn/{$stock}/field.html</url>
+			<day>E:\\stock\\industry\\{$today}\\{$stock}_industry.html</day>
+			<main>E:\\stock\\industry\\main\\{$stock}_industry.html</main>
+			<remark>行业比较</remark>
+		</path>
+		
+		<path id ="equity">
+			<name>equity</name>
+			<url>http://basic.10jqka.com.cn/{$stock}/equity.html#astockchange</url>
+			<day>E:\\stock\\equity\\{$today}\\{$stock}_equity.html</day>
+			<main>E:\\stock\\equity\\main\\{$stock}_equity.html</main>
+			<remark>股本结构</remark>
+		</path>
+		
+		<path id ="worth">
+			<name>worth</name>
+			<url>http://basic.10jqka.com.cn/{$stock}/worth.html</url>
+			<day>E:\\stock\\worth\\{$today}\\{$stock}_worth.html</day>
+			<main>E:\\stock\\worth\\main\\{$stock}_worth.html</main>
+			<remark>盈利预测</remark>
+		</path>
+		
+		<path id ="ipproxydl">
+			<name>ipproxy</name>
+			<url>http://www.goubanjia.com/</url>
+			<day>E:\\stock\\ipproxy\\{$today}\\{$time}_ipproxy.html</day>
+			<main>E:\\stock\\ipproxy\\main\\ipproxy.html</main>
+			<remark>代理ip下周</remark>
+		</path>
+		
+		//------------------------------------结果-----------------------------------
+		<path id ="ipproxyinit">
+			<name>ipproxyinit</name>
+			<url>http://www.goubanjia.com/</url>
+			<day>E:\\stock\\ipproxy\\{$today}\\{$today}_ipproxy.csv</day>time
+			<main>E:\\stock\\ipproxy\\main\\ipproxy.csv</main>
+			<remark>代理ip初始化</remark>
+		</path>
+		
+		<path id ="pegs">
+			<name>pegs</name>
+			<url>http://basic.10jqka.com.cn/{$stock}/worth.html</url>
+			<day>E:\\stock\\pegs\\{$today}\\{$stock}_pegs.csv</day>
+			<main>E:\\stock\\pegs\\main\\{$stock}_pegs.csv</main>
+			<remark>PEG流水</remark>
+		</path>
+		
+		<path id ="compareallpeg">
+			<name>pegs</name>
+			<url>http://basic.10jqka.com.cn/{$stock}/worth.html</url>
+			<day>E:\\stock\\compareallpeg\\{$today}\\compareallpeg.csv</day>
+			<main>E:\\stock\\compareallpeg\\main\\compareallpeg.csv</main>
+			<remark>peg得分比较</remark>
+		</path>
 		
 	</paths>
 	

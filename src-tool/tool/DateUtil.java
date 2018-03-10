@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.joda.time.DateTime;
+
 public class DateUtil
 {
   public static final String ISO_DATE_FORMAT = "dd-MMM-yyyy";
@@ -83,18 +85,20 @@ public class DateUtil
   }
 
   public static String getRelativeDate(String sDate, int iYear, int iMonth, int iDate, String sFormat)
-    throws ParseException
   {
     if (sDate == null) return null;
-    Date date = parseString2Date(sDate, "yyyy/MM/dd");
-    return getRelativeDate(date, iYear, iMonth, iDate, sFormat);
+    DateTime dt = DateTime.parse(sDate);
+    dt = dt.plusYears(iYear);
+    dt = dt.plusMonths(iMonth);
+    dt = dt.plusDays(iDate);
+    return dt.toString(sFormat);
   }
 
   public static String getRelativeDate(Date date, int iYear, int iMonth, int iDate) {
     return getRelativeDate(date, iYear, iMonth, iDate, "yyyy/MM/dd");
   }
 
-  public static String getRelativeDate(String sDate, int iYear, int iMonth, int iDate) throws ParseException
+  public static String getRelativeDate(String sDate, int iYear, int iMonth, int iDate)
   {
     return getRelativeDate(sDate, iYear, iMonth, iDate, "yyyy/MM/dd");
   }
@@ -103,7 +107,7 @@ public class DateUtil
     return getRelativeDate(date, iYear, iMonth, 0, s);
   }
 
-  public static String getRelativeMonth(String sDate, int iYear, int iMonth, String s) throws ParseException
+  public static String getRelativeMonth(String sDate, int iYear, int iMonth, String s)
   {
     return getRelativeDate(sDate, iYear, iMonth, 0, s);
   }
@@ -112,7 +116,7 @@ public class DateUtil
     return getRelativeDate(date, iYear, iMonth, 0, "yyyy/MM");
   }
 
-  public static String getRelativeMonth(String sDate, int iYear, int iMonth) throws ParseException {
+  public static String getRelativeMonth(String sDate, int iYear, int iMonth) {
     return getRelativeDate(sDate, iYear, iMonth, 0, "yyyy/MM");
   }
 
@@ -254,4 +258,24 @@ public class DateUtil
     cal.setTime(parseString2Date(date, format));
     return cal;
   }
+  
+	
+	/**
+	 * 获取指定格式的系统当前日期/时间
+	 */
+	public static String getCurrentDate(String format) {
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+	    Calendar c = Calendar.getInstance();
+	    return sdf.format(c.getTime());
+	}
+	
+	
+	/**
+	 * 获取指定格式的系统当前日期/时间
+	 */
+	public static String getCalendarToString(Calendar calendar,String dateFormat) {
+		calendar = calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+		return sdf.format(calendar.getTime());
+	}
 }

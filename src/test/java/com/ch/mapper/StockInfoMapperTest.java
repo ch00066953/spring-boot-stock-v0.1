@@ -1,6 +1,8 @@
 package com.ch.mapper;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,16 +14,23 @@ import com.ch.pojo.StockInfo;
 import com.ch.pojo.StockInfoExample;
 
 import junit.framework.Assert;
+import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class StockInfoMapperTest {
 	@Autowired
 	private StockInfoMapper StockInfoMapper;
 	
+    //private Logger logger = LoggerFactory.getLogger(StockInfoMapperTest.class);
+	
 	@Test
 	public void testCountByExample() {
-		fail("Not yet implemented");
+		int i  = StockInfoMapper.countByExample(null);
+		log.info(i+"");
+		log.debug(i+"");
+		log.debug(i+"");
 	}
 
 	@Test
@@ -32,7 +41,13 @@ public class StockInfoMapperTest {
 
 	@Test
 	public void testDeleteByPrimaryKey() {
-		fail("Not yet implemented");
+		if(StockInfoMapper.selectByPrimaryKey("111")!= null)
+			log.debug(StockInfoMapper.selectByPrimaryKey("111").getArea());
+		else
+			log.error("error");
+		
+		StockInfo Stock = StockInfoMapper.selectByPrimaryKey("000001");
+		Assert.assertEquals("000001", Stock.getId());
 	}
 
 	@Test
@@ -51,7 +66,7 @@ public class StockInfoMapperTest {
 
 	@Test
 	public void testSelectByExample() {
-		fail("Not yet implemented");
+		List<StockInfo> l = StockInfoMapper.selectByExample(null);
 	}
 
 	@Test

@@ -48,6 +48,16 @@ public class DownLoad {
 		
 	}
 	
+	public static void downLoanPath(Path p) throws IOException {
+		
+		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
+			System.out.println("exists");
+			return;
+		}
+		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
+		
+	}
+	
 	public static void downLoanPath(String id,String stock) throws IOException {
 		
 		PathMap pm = new PathMap();
@@ -58,6 +68,19 @@ public class DownLoad {
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
+		
+	}
+	
+	public static void downLoanPathByHead(String id,Map<String,String> headerMap,String stock) throws IOException {
+		
+		PathMap pm = new PathMap();
+		Path p = pm.getPath(id);
+		p.setReMap(stock);
+		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
+			System.out.println("exists");
+			return;
+		}
+		HttpUtil.downloadFile2(p.getU(),headerMap,p.getM(),p.getD());
 		
 	}
 	

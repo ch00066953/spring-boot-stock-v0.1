@@ -3,8 +3,11 @@ package tool.rep;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.joda.time.DateTime;
+
 import tool.DateUtil;
 import tool.StringFunction;
+import tool.StringX;
 
 /**
  * 替换字符
@@ -29,6 +32,7 @@ public class Replace {
 	public void init(String src, Map<String, String> map) {
 		this.src = src;
 		this.url = src;
+		
 		this.map.put("today", DateUtil.getToday());
 		if (map != null)
 			this.map.putAll(map);
@@ -126,7 +130,8 @@ public class Replace {
 	public static Map<String, String> initRMap(String ...stock) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("today", DateUtil.getToday());
-		if(stock != null && stock.length != 0){
+		map.put("time", DateUtil.getNowTime("HH:mm"));
+		if(stock != null && stock.length != 0 && !StringX.isEmpty(stock[0])){
 			if (stock[0].startsWith("6"))
 				map.put("stockall", stock[0]+".ss");
 			else

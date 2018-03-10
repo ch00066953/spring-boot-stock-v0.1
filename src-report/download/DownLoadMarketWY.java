@@ -5,11 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import stock.StockInfo1;
+import tool.DateUtil;
 import tool.DownLoad;
-import tool.StringFunction;
 import tool.fileAnalysis.CSVAnalysis;
-import tool.fileAnalysis.HttpUtil;
-import tool.rep.Replace;
 
 public class DownLoadMarketWY {
 	//本地路径
@@ -33,12 +31,12 @@ public class DownLoadMarketWY {
 			m.put("hstype","1");
 		m.put("stock",sStockNo);
 		m.put("begindate","2000/01/01");
-		m.put("enddate",StringFunction.getToday(""));
+		m.put("enddate",DateUtil.getToday(""));
 		m.put("row","TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP");
 		DownLoad.delete(p,m);
 		DownLoad.downLoanPath("allmarket_wy",m);
 		CSVAnalysis market = new CSVAnalysis(p.getM());
-		System.out.println(market.listFile);
+		System.out.println(market.getTabList());
 	}
 	
 	/**

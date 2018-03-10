@@ -11,6 +11,8 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.joda.time.DateTime;
+
 public class StringFunction
 {
   private static int[] weight = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1 };
@@ -283,39 +285,10 @@ public class StringFunction
     }
     return sNewArray;
   }
-  
-  /**
-   * @deprecated
-   */
-  public static String getToday()
-  {
-    return DateX.format(new java.util.Date());
-  }
-  
-  /**
-   * @deprecated
-   */
-  public static String getToday(String sFormat)
-  {
-    java.util.Date dToday = new java.util.Date();
-    String sToday = new java.sql.Date(dToday.getTime()).toString();
-    sToday = replace(sToday, "-", sFormat);
-    return sToday;
-  }
-  
+
   public static String date2String(java.sql.Date dateDate, String sFormat)
   {
     String sToday = dateDate.toString();
-    sToday = replace(sToday, "-", sFormat);
-    return sToday;
-  }
-  
-  /**
-   * @deprecated
-   */
-  public static String date2String(java.util.Date dateDate, String sFormat)
-  {
-    String sToday = new java.sql.Date(dateDate.getTime()).toString();
     sToday = replace(sToday, "-", sFormat);
     return sToday;
   }
@@ -523,24 +496,6 @@ public class StringFunction
       sMonth = "0" + sMonth;
     }
     return sYear + "/" + sMonth;
-  }
-  
-  /**
-   * @deprecated
-   */
-  public static String getRelativeMonth(String sDate, int iStep)
-  {
-    DateX dx = new DateX(sDate);
-    return DateX.format(dx.getAdjustRelativeDate(1, iStep, false));
-  }
-  
-  /**
-   * @deprecated
-   */
-  public static String getRelativeDate(String sDate, int iStep)
-  {
-    DateX dx = new DateX(sDate);
-    return DateX.format(dx.getAdjustRelativeDate(2, iStep, false));
   }
   
   public static String numberToChinese(double doubleNum)
@@ -755,11 +710,6 @@ public class StringFunction
     return dst;
   }
   
-  
-  public static String getTodayNow()
-  {
-    return getToday("/") + " " + getNow();
-  }
   
   public static String getMathRandom()
   {

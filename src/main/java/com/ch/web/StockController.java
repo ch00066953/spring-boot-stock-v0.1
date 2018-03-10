@@ -6,33 +6,33 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import tool.fileAnalysis.action.PESerialCalc;
+import com.ch.service.PESerialCalc;
 
 @Controller
 public class StockController {
-	
-	  @RequestMapping("/stock")
-		public String stock(Locale locale, Model model) throws Exception {
 
-		  	PESerialCalc p = new PESerialCalc("300070");
-			p.setPerNetP("235000");//万
-			p.runFAll();
-			
-			model.addAttribute("rows",p.exportData);
-			model.addAttribute("head",p.map);
+	@RequestMapping("/stock")
+	public String stock(Locale locale, Model model) throws Exception {
 
-			return "pages/stock";
-		}
+		PESerialCalc p = new PESerialCalc("300070");
+		p.setPerNetP("235000");// 万
+		p.runFAll();
 
-	  @RequestMapping("/stock1")
-		public String stock1(Locale locale, Model model) throws Exception {
+		model.addAttribute("rows", p.exportData);
+		model.addAttribute("head", p.map);
 
-			return "stock1";
-		}
-	  
-	  @RequestMapping("/load")
-		public String load(Locale locale, Model model) throws Exception {
+		return "pages/stock";
+	}
 
-			return "load";
-		}
+	@RequestMapping("/stock1")
+	public String stock1(Locale locale, Model model) throws Exception {
+
+		return "stock1";
+	}
+
+	@RequestMapping("/load")
+	public String load(Locale locale, Model model) throws Exception {
+
+		return "load";
+	}
 }

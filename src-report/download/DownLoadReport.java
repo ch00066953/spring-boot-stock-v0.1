@@ -4,14 +4,14 @@ import java.io.File;
 import java.util.List;
 
 import stock.StockInfo1;
+import tool.DateUtil;
 import tool.DownLoad;
-import tool.StringFunction;
 import tool.fileAnalysis.HttpUtil;
 
 public class DownLoadReport {
 	
 	//本地路径
-	String ourputFile = PathUtil.LOCALPATH+"\\"+StringFunction.getToday("")+PathUtil.MAINREPORTPATH;
+	String ourputFile = PathUtil.LOCALPATH+"\\"+DateUtil.getToday()+PathUtil.MAINREPORTPATH;
 	//本地路径
 	String allFilePath = "";
 	//下载路径

@@ -123,6 +123,12 @@ public class TableBean {
 		return iSize;
 	}
 	
+	public int finishRow(){
+		int nowCol = iSize % iCol;
+		for(;nowCol < getColCount();nowCol++)
+			add("");
+		return iSize;
+	}
 	public int add(LinkedHashMap<String,String> map){
 		List<String> listT;
 		
@@ -155,7 +161,16 @@ public class TableBean {
 	public String getCell(int iRow, int iCol) {
 		String value = tabList.get(iRow).get(iCol);
 		return value;
-		
+	}
+
+	public String getCell(int iRow, String sCol) {
+		String value = list.get(iRow).get(sCol);
+		return value;
+	}
+	
+	public String getCell(String sRow, int iCol) {
+		String value = list.get(rowno.get(sRow)).get(colhead.get(iCol));
+		return value;
 	}
 	
 	public String getCell(String sRow, String sCol) {

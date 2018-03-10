@@ -56,6 +56,13 @@ public class PathImpl implements Path {
 		return Replace.replace(docMap.get(para), reMap);
 	}
 	/**
+	 * 转换前的xml参数
+	 * @return
+	 */
+	public String getDoc(String para) {
+		return docMap.get(para);
+	}
+	/**
 	 * 转换后的MAIN
 	 * @return
 	 */
@@ -93,6 +100,30 @@ public class PathImpl implements Path {
 		day = docMap.get("day");
 		main = docMap.get("main");
 	}
+	
+	public boolean isDownLoanToday() {
+		if(new File(getD()).exists()){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isDownLoan() {
+		if(new File(getM()).exists()){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isEffective() {
+		File f = new File(getD());
+		if(f.exists() || f.length() >0){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println(System.getProperty("user.dir")); ;
 		File in = new File(System.getProperty("user.dir")+"\\WebContent\\WEB-INF\\etc\\dlconfig.xml");

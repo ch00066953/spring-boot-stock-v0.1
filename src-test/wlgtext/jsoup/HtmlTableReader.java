@@ -1,5 +1,6 @@
 package wlgtext.jsoup;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -13,7 +14,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import download.Path;
 import tool.DateUtils;
+import tool.StringX;
 
 /**
  * Html table 读取器
@@ -26,13 +29,21 @@ public class HtmlTableReader {
 	public Map<String, Integer> rowNo = new LinkedHashMap<String, Integer>();//列号映射
 	public Map<Integer,String> rowSort = new LinkedHashMap<Integer,String>(); //列号排序映射
 	public List<List<String>> tableList = new LinkedList<List<String>>(); //table内容List封装
+	private int dateRow = 1;
 	Elements eHead ; //<thead> <tr> <th>
 	Elements eRowHead ;//<tbody> <tr> <th>
 	Elements ebody ;//<tbody>
 	Elements tableE ;//<tbody>div
 	
-	public HtmlTableReader(String url,String id) throws IOException {
-		readHtmlTable(url,id);
+	public HtmlTableReader(String url,String id,String ...para) throws IOException {
+		readHtmlTable(url,id,para);
+		readHead();
+		readBody();
+		readTableVuale();
+	}
+	
+	public HtmlTableReader(Path p,String id,String ...para) throws IOException {
+		readHtmlTable(p.getM(),id,para);
 		readHead();
 		readBody();
 		readTableVuale();
@@ -43,9 +54,20 @@ public class HtmlTableReader {
 	 * @param doc2
 	 * @throws IOException 
 	 */
-	private void readHtmlTable(String url,String id) throws IOException {
-		Document doc = Jsoup.connect(url).get();
-		tableE = doc.select("#"+id);
+	private void readHtmlTable(String url,String id,String ...para) throws IOException {
+		Document doc;
+		if(url.startsWith("http"))
+			doc = Jsoup.connect(url).get();
+		else{
+			File f = new File(url);
+			doc = Jsoup.parse(f, "gbk", "");
+		}
+		String select = "";
+		if(!StringX.isEmpty(id))
+			select += "#"+id + " ";
+		for(String p : para )
+			select += p + " ";
+		tableE = doc.select(select);
 	}
 	
 	/**
@@ -69,8 +91,9 @@ public class HtmlTableReader {
 	private void readBody() {
 		int i = 1;
 		ebody = tableE.select("tbody");
-//		eRowHead = ebody.select("th");
-		eRowHead = ebody.select("td.tc.f12");
+		eRowHead = ebody.select("th");
+		if(eRowHead.isEmpty())
+			eRowHead = ebody.select("td:first-child");
 //		String body = doc.select("tbody").toString();
 //		System.out.println(body);
 		for (Element eh : eRowHead){
@@ -123,6 +146,20 @@ public class HtmlTableReader {
 		return e.text();
 	}
 	
+	
+	/**
+	 * 直接去HTML文本的值
+	 * @param rNo
+	 * @param cNo
+	 * @return
+	 */
+	public String getRowCol(String rName,String cName) {
+		int r,c;
+		c = colNo.get(cName);
+		r = rowNo.get(rName);
+		return getString(r,c);
+	}
+	
 	/**
 	 * 根据行列名取值
 	 * @param rName
@@ -152,18 +189,18 @@ public class HtmlTableReader {
 	 * @return
 	 */
 	private String getDate(String date) {
-		int iRow = 1;
+//		int dateRow = 1;
 		DateTime d1 = new DateTime(DateUtils.parseDate(date));  
 		DateTime d2 ;  
-		for(;iRow <= rowSort.size();iRow++){
-			Date sortDate = DateUtils.parseDate(rowSort.get(iRow));
+		for(;dateRow < rowSort.size();dateRow++){
+			Date sortDate = DateUtils.parseDate(rowSort.get(dateRow));
 			d2 = new DateTime(sortDate);
 			
 			if(d2.isBefore(d1) || d2.isEqual(d1)){
-				return rowSort.get(iRow);
+				return rowSort.get(dateRow);
 			}
 		}
-		return rowSort.get(iRow);
+		return rowSort.get(dateRow);
 	}
 	
 	/**

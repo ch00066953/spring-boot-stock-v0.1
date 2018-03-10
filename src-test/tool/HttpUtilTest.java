@@ -67,5 +67,14 @@ public class HttpUtilTest {
         "http://basic.10jqka.com.cn/new/000002/xls/mainreport.xls",
         "f:\\0000022.xls","f:\\0000023.xls");
 	}
+	@Test
+	public void testDownloadFile2() throws IOException {
+		Map<String,String> headerMap = new HashMap<>();
+		headerMap.put("Referer", "http://www.sse.com.cn/assortment/stock/list/share/");
+		HttpUtil.downloadFile2(
+				"http://query.sse.com.cn/security/stock/downloadStockListFile.do?csrcCode=&stockCode=&areaName=&stockType=1",
+				headerMap,
+				"f:\\0000022.xls","f:\\0000023.xls");
+	}
 
 }

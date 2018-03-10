@@ -1,5 +1,6 @@
 package tool.fileAnalysis;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -40,8 +41,14 @@ public class HtmlTableReader {
 	 * @throws IOException 
 	 */
 	private void readHtmlTable(String url,String id) throws IOException {
-		url = "http://basic.10jqka.com.cn/600887/equity.html#astockchange";
-		Document doc = Jsoup.connect(url).get();
+//		url = "http://basic.10jqka.com.cn/600887/equity.html#astockchange";
+		Document doc;
+		if(url.startsWith("http"))
+			doc = Jsoup.connect(url).get();
+		else{
+			File f = new File(url);
+			doc = Jsoup.parse(f, "");
+		}
 		tableE = doc.select("#"+id);
 	}
 	

@@ -47,6 +47,9 @@ public class StockInfo {
 
     private String status;
 
+    public StockInfo() {
+    	
+    }
     public StockInfo(String id) {
     	setId(id);
 	}

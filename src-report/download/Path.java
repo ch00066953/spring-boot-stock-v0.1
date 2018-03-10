@@ -24,8 +24,13 @@ public interface Path {
 	public String getM();
 	
 	public String get(String para);
+	public String getDoc(String para);
 	
 	public void setReMap(String stock);
 	public void setReMap(Map m);
 	public void setReMap(String p1,String p2);
+	
+	public boolean isDownLoanToday() ;
+	public boolean isDownLoan() ;
+	public boolean isEffective() ;
 }

@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -19,12 +20,98 @@ import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
  
 import org.apache.commons.beanutils.BeanUtils;
+
+import download.Path;
+import tool.DeleteFileUtil;
+import tool.fileAnalysis.bean.TableBean;
  
 /**
  * 文件操作
  */
 public class CSVUtils {
+	
+	
+	public static File createCSVFile(TableBean tb, Path p) {
+		return createCSVFile(tb.getList(),null,p);
+	}
  
+	/**
+	 * 生成为CVS文件 
+	 * @param list
+	 *       源数据List
+	 * @param map
+	 *       csv文件的列表头map
+	 * @param outPutPath
+	 *       文件路径
+	 * @param fileName
+	 *       文件名称
+	 * @return
+	 */
+	@SuppressWarnings("rawtypes")
+	public static File createCSVFile(List<LinkedHashMap<String, String>> list, LinkedHashMap map, Path p) {
+		Map headMap;
+		File csvFile = new File(p.getD());
+		File csvMFile = new File(p.getM());
+		BufferedWriter csvFileOutputStream = null;
+		try {
+			if (!csvFile.getParentFile().exists())
+				csvFile.getParentFile().mkdirs();
+			if (!csvMFile.getParentFile().exists()){
+				csvMFile.getParentFile().mkdirs();
+			}else{
+				DeleteFileUtil.deleteFile(p.getM());		
+			}
+			//定义文件名格式并创建
+			System.out.println("csvFile：" + csvFile);
+			// UTF-8使正确读取分隔符"," 
+			csvFileOutputStream = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+					csvFile), "UTF-8"), 1024);
+			System.out.println("csvFileOutputStream：" + csvFileOutputStream);
+			// 写入文件头部 
+			if(map != null){
+				headMap = map;
+				for (Iterator propertyIterator = headMap.entrySet().iterator(); propertyIterator.hasNext();) {
+					java.util.Map.Entry propertyEntry = (java.util.Map.Entry) propertyIterator.next();
+					csvFileOutputStream
+					.write("" + (String) propertyEntry.getValue() != null ? (String) propertyEntry
+							.getValue() : "" + "");
+					if (propertyIterator.hasNext()) {
+						csvFileOutputStream.write(",");
+					}
+				}
+				csvFileOutputStream.newLine();
+			}else
+				headMap = list.get(0);
+			// 写入文件内容 
+			for (Iterator iterator = list.iterator(); iterator.hasNext();) {
+				Object row = (Object) iterator.next();
+				for (Iterator propertyIterator = headMap.entrySet().iterator(); propertyIterator
+						.hasNext();) {
+					java.util.Map.Entry propertyEntry = (java.util.Map.Entry) propertyIterator
+							.next();
+					csvFileOutputStream.write((String) BeanUtils.getProperty(row,(String) propertyEntry.getKey()));
+					if (propertyIterator.hasNext()) {
+						csvFileOutputStream.write(",");
+					}
+				}
+				if (iterator.hasNext()) {
+					csvFileOutputStream.newLine();
+				}
+			}
+			csvFileOutputStream.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				csvFileOutputStream.close();
+				Files.copy(csvFile.toPath(), csvMFile.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return csvFile;
+	}
+	
   /**
    * 生成为CVS文件 
    * @param exportData
