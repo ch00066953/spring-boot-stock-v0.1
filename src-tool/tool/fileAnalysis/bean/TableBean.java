@@ -6,27 +6,39 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import lombok.Getter;
+
 /**
  * 构造table方便存取数据
  * @author admin
  *
  */
 public class TableBean {
+	@Getter
 	protected Map<String, Integer> colno;
+	@Getter
+	protected Map colAlias;
+	@Getter
 	protected Map<String, Integer> rowno;
+	@Getter
 	protected List<String> colhead;
+	@Getter
 	protected List<String> rowhead;
+	@Getter
 	protected int iRow ;
+	@Getter
 	protected int iCol ;
+	@Getter
 	protected int iSize ;
-	
-	/*protected Map<String, Map<String,String>> table;*/
-	protected List<LinkedHashMap<String,String>> list;
+	@Getter
+	protected List<Map> list;
+	@Getter
 	protected List<List<String>> tabList; 
 
 	public TableBean() {
 		colno = new LinkedHashMap<>();
 		rowno = new LinkedHashMap<>();
+		colAlias = new LinkedHashMap<>();
 		colhead = new ArrayList<>();
 		rowhead = new ArrayList<>();
 //		table = new LinkedHashMap<>();
@@ -47,6 +59,7 @@ public class TableBean {
 	public int addHead(String h){
 		colhead.add(h);
 		colno.put(h, iCol++);
+		colAlias.put(h, h);
 		return iCol;
 	}
 	public int initHead(String h,String r){
@@ -101,7 +114,7 @@ public class TableBean {
 	public int add(String value){
 		int nowCol = iSize % iCol;
 //		int nowRow = sizeCount / colCount;
-		LinkedHashMap<String, String> map ;
+		Map map ;
 		List<String> listT;
 		if(nowCol == 0){
 			map = new LinkedHashMap<>();
@@ -123,6 +136,12 @@ public class TableBean {
 		return iSize;
 	}
 	
+	public int finishRow(){
+		int nowCol = iSize % iCol;
+		for(;nowCol < getICol();nowCol++)
+			add("");
+		return iSize;
+	}
 	public int add(LinkedHashMap<String,String> map){
 		List<String> listT;
 		
@@ -155,12 +174,25 @@ public class TableBean {
 	public String getCell(int iRow, int iCol) {
 		String value = tabList.get(iRow).get(iCol);
 		return value;
-		
+	}
+
+	public String getCell(int iRow, String sCol) {
+		String value = list.get(iRow).get(sCol).toString();
+		return value;
+	}
+	
+	public String getCell(String sRow, int iCol) {
+		String value = list.get(rowno.get(sRow)).get(colhead.get(iCol)).toString();
+		return value;
 	}
 	
 	public String getCell(String sRow, String sCol) {
-		String value = list.get(rowno.get(sRow)).get(sCol);
+		String value = list.get(rowno.get(sRow)).get(sCol).toString();
 		return value;
+	}
+	
+	public Map getRowM(String sRow) {
+		return list.get(rowno.get(sRow));
 	}
 	
 	public int getRow(String sRow) {
@@ -171,34 +203,7 @@ public class TableBean {
 		return colno.get(sCol);
 	}
 	//-----------------获取数据 end---------------------------------
-	public Map<String, Integer> getColno() {
-		return colno;
-	}
 
-	public Map<String, Integer> getRowno() {
-		return rowno;
-	}
-
-	public int getRowCount() {
-		return iRow;
-	}
-
-	public int getColCount() {
-		return iCol;
-	}
-
-	public List<String> getColhead() {
-		return colhead;
-	}
-	public int getSizeCount() {
-		return iSize;
-	}
-	public List<LinkedHashMap<String, String>> getList() {
-		return list;
-	}
-	public List<List<String>> getTabList() {
-		return tabList;
-	}
 	
 	
 }

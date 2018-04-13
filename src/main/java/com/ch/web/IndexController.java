@@ -19,6 +19,12 @@ public class IndexController {
 		return "index";
 	}
     
+
+    @RequestMapping("/home")
+	public String home(Locale locale, Model model) {
+		return "home";
+	}
+    
     @RequestMapping("/test")  
     public String hello(Model map){  
         Map user= new HashMap();  

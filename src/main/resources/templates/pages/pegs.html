@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layouts">
+<head th:include="layouts :: htmlhead" th:with="title='home'">
+
+</head>
+<body>
+	<section layout:fragment="contentf">
+		<div th:replace="pages/fragments/pegs-datatable :: pegs">jq_datatable</div>
+		
+	</section>
+	
+	<section layout:fragment="script">
+		<script th:src="@{/js/stock/pegs.js}"></script>
+	</section>
+	
+</body>
+</html>

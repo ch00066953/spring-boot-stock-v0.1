@@ -12,10 +12,13 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*import com.ch.domain.User;*/
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Slf4j
 public class TestRedis {
 
     @Autowired
@@ -26,8 +29,9 @@ public class TestRedis {
 
     @Test
     public void test() throws Exception {
-        stringRedisTemplate.opsForValue().set("aaa", "111");
-        Assert.assertEquals("111", stringRedisTemplate.opsForValue().get("aaa"));
+    	redisTemplate.opsForValue().set("aaa", "111");
+    	log.info(redisTemplate.opsForValue().get("aaa").toString());
+        Assert.assertEquals("111", redisTemplate.opsForValue().get("aaa"));
     }
     
     @Test

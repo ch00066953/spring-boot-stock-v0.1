@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<!-- Left Sidebar -->
+	<aside id="leftsidebar" class="sidebar" th:fragment="leftside">
+		<!-- User Info -->
+		<div class="user-info">
+			<div class="image">
+				<img src="/images/userb.jpg" width="48" height="48" alt="User" />
+			</div>
+			<div class="info-container">
+				<div class="name" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">Warren Buffett</div>
+				<div class="btn-group user-helper-dropdown">
+					<i class="material-icons" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+					<ul class="dropdown-menu pull-right">
+						<li><a href="javascript:void(0);"><i
+								class="material-icons">person</i>Profile</a></li>
+						<li role="seperator" class="divider"></li>
+						<li><a href="javascript:void(0);"><i
+								class="material-icons">group</i>Followers</a></li>
+						<li><a href="javascript:void(0);"><i
+								class="material-icons">shopping_cart</i>Sales</a></li>
+						<li><a href="javascript:void(0);"><i
+								class="material-icons">favorite</i>Likes</a></li>
+						<li role="seperator" class="divider"></li>
+						<li><a href="javascript:void(0);"><i
+								class="material-icons">input</i>Sign Out</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- #User Info -->
+		 <!-- Menu -->
+            <div class="menu">
+                <ul class="list">
+                <!-- class="active" -->
+                    <li class="header active" >MAIN NAVIGATION</li>
+                    <li >
+                        <a href="/home">
+                            <i class="material-icons">home</i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">trending_up</i>
+                            <span>Stock</span>
+                        </a>
+                        <ul class="ml-menu">
+                        
+                            <li>
+                                <a href="/stock/peg" >全股评分</a>
+                            </li>
+                            <li>
+                                <a href="/stock/id" >个股详情</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">collections_bookmark</i>
+                            <span>OutLine</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Main Line</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="/collection/information">资讯</a>
+                                    </li>
+                                    <li>
+                                        <a href="/collection/forum">交流</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="menu-toggle">
+                                    <span>Other Line</span>
+                                </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <a href="/collection/other">其他网站</a>
+                                        <!-- <a href="collection/self">收藏</a> -->
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- #Menu -->
+		<!-- Footer -->
+		<div class="legal">
+			<div class="copyright">
+				&copy; 2018 - 2019 <a href="javascript:void(0);">xiao k</a>.
+			</div>
+			<div class="version">
+				<b>Version: </b> 1.0.5
+			</div>
+		</div>
+		<!-- #Footer -->
+	</aside>
+	<!-- #END# Left Sidebar -->
+
+</body>
+</html>
+

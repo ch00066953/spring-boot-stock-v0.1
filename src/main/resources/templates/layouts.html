@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:fragment="htmlhead">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>小K | 智能评价股票</title>
+    <!-- Favicon-->
+    <link rel="icon" th:href="@{/favicon.bmp}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link th:href="@{/plugins/bootstrap/css/bootstrap.css}" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link th:href="@{/plugins/node-waves/waves.css}" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link th:href="@{/plugins/animate-css/animate.css}" rel="stylesheet" />
+    
+    <!-- JQuery DataTable Css -->
+    <link th:href="@{/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css}" rel="stylesheet">
+    
+    <!-- Morris Chart Css-->
+    <link th:href="@{/plugins/morrisjs/morris.css}" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link th:href="@{/css/themes/all-themes.css}" rel="stylesheet" />
+	
+  </head>
+
+  <body class="layout-fixed theme-red">
+    <div th:fragment="navbar"  class="wrapper"  role="navigation">
+		<div th:replace="fragments/loader :: loader">loader</div>
+		<div th:replace="fragments/search :: search">search</div>
+		<div th:replace="fragments/top :: top">top</div>
+		<section>
+			<div th:replace="fragments/leftside :: leftside">leftside</div>
+			<div th:replace="fragments/rightside :: rightside">rightside</div>
+		</section>
+		<section class="content">
+		
+			<div class="container-fluid" layout:fragment="contentf" id="contentf" >
+			
+			</div>
+		
+		</section>
+    </div>
+    <!--  -->
+    
+    
+    <!-- Jquery Core Js -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    	
+    <!-- Jquery Cookie Js -->
+    <script th:src="@{/plugins/jquery-cookie/jquery.cookie.js}"></script>
+    
+    <!-- Bootstrap Core Js -->
+    <script th:src="@{/plugins/bootstrap/js/bootstrap.js}"></script>
+
+    <!-- Select Plugin Js -->
+    <script th:src="@{/plugins/bootstrap-select/js/bootstrap-select.js}"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script th:src="@{/plugins/jquery-slimscroll/jquery.slimscroll.js}"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script th:src="@{/plugins/node-waves/waves.js}"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script th:src="@{/plugins/jquery-countto/jquery.countTo.js}"></script>
+
+	<!-- Jquery DataTable Plugin Js -->
+    <script th:src="@{/plugins/jquery-datatable/jquery.dataTables.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/buttons.flash.min.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/jszip.min.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/pdfmake.min.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/vfs_fonts.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/buttons.html5.min.js}"></script>
+    <script th:src="@{/plugins/jquery-datatable/extensions/export/buttons.print.min.js}"></script>
+
+
+	
+    <!-- Morris Plugin Js -->
+    <script th:src="@{/plugins/raphael/raphael.min.js}"></script>
+    <script th:src="@{/plugins/morrisjs/morris.js}"></script>
+
+    <!-- ChartJs -->
+    <script th:src="@{/plugins/chartjs/Chart.bundle.js}"></script>
+
+    <!-- Flot Charts Plugin Js -->
+    <script th:src="@{/plugins/flot-charts/jquery.flot.js}"></script>
+    <script th:src="@{/plugins/flot-charts/jquery.flot.resize.js}"></script>
+    <script th:src="@{/plugins/flot-charts/jquery.flot.pie.js}"></script>
+    <script th:src="@{/plugins/flot-charts/jquery.flot.categories.js}"></script>
+    <script th:src="@{/plugins/flot-charts/jquery.flot.time.js}"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script th:src="@{/plugins/jquery-sparkline/jquery.sparkline.js}"></script>
+
+    <!-- Custom Js -->
+    <script th:src="@{/js/menu.js}"></script>
+    <script th:src="@{/js/admin.js}"></script>
+    <script th:src="@{/js/search.js}"></script>
+
+    <!-- Demo Js -->
+    <script th:src="@{/js/demo.js}"></script>
+    <!--  -->
+	
+	<div layout:fragment="script" ></div>
+	
+</body>
+</html>

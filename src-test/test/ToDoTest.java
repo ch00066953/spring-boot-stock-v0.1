@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
@@ -10,7 +8,7 @@ import org.junit.Test;
 
 import parameter.Para;
 import stock.StockInfo1;
-import tool.StringFunction;
+import tool.DateUtil;
 import wlgtext.MailTest;
 
 public class ToDoTest {
@@ -33,7 +31,7 @@ public class ToDoTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			message = "RATING FINISH 次数：？|剩余：？|Rating日期："+Para.getDate()+"|当前时间"+StringFunction.getTodayNow()
+			message = "RATING FINISH 次数：？|剩余：？|Rating日期："+Para.getDate()+"|当前时间"+DateUtil.getNowTime()
 			+"|IP:"+ ip +"|avg:"+avg;
 		MailTest.sendPrompt("RATING FINISH", message);
 	}

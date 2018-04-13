@@ -1,7 +1,8 @@
 package com.ch.pojo;
 
 public class StockInfo {
-    private String id;
+
+	private String id;
 
     private String compabbre;
 
@@ -47,6 +48,9 @@ public class StockInfo {
 
     private String status;
 
+    public StockInfo() {
+    	
+    }
     public StockInfo(String id) {
     	setId(id);
 	}

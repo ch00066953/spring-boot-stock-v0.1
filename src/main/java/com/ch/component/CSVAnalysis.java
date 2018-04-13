@@ -1,4 +1,4 @@
-package tool.fileAnalysis;
+package com.ch.component;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -20,8 +20,10 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.springframework.stereotype.Component;
 
 import tool.DownLoad;
+import tool.fileAnalysis.bean.TableBean;
 import download.Path;
 import download.PathMap;
 
@@ -30,13 +32,14 @@ import download.PathMap;
  * @author lgwang
  *
  */
-public class CSVAnalysis {
+@Component
+public class CSVAnalysis extends TableBean{
 	private InputStreamReader fr = null;
 	private BufferedReader br = null;
-	public List<List<String>> listFile = null;
-	public Map<String, Integer> colNo = new LinkedHashMap<String, Integer>(); //行号映射
-	public Map<String, Integer> rowNo = new LinkedHashMap<String, Integer>();//列号映射
-
+	
+	public CSVAnalysis(){
+		
+	}
 	
 	public CSVAnalysis(InputStream f) throws IOException {
 		fr = new InputStreamReader(f);
@@ -44,7 +47,11 @@ public class CSVAnalysis {
 	}
 	
 	public CSVAnalysis(String url) throws Exception {
-		
+		init(url);
+	}
+	
+	public void init(String url) throws Exception {
+
 		initCSV(url);
 		readCSVFile();
 	}
@@ -62,11 +69,10 @@ public class CSVAnalysis {
 
 	}
 
-	public List<List<String>> readCSVFile() throws IOException {
+	public void readCSVFile() throws IOException {
 		br = new BufferedReader(fr);
 		String rec = null;// 一行
 		String str;// 一个单元格
-		listFile = new ArrayList<List<String>>();
 		try {
 			int iRowNo = 0;
 			// 读取一行
@@ -75,7 +81,6 @@ public class CSVAnalysis {
 						.compile("(\"[^\"]*(\"{2})*[^\"]*\")*[^,]*,");
 				Matcher mCells = pCells.matcher(rec + ",");
 				List<String> cells = new ArrayList<String>();// 每行记录一个list
-				int iColNo = 0;
 				// 读取每个单元格
 				while (mCells.find()) {
 					str = mCells.group();
@@ -83,17 +88,12 @@ public class CSVAnalysis {
 							.replaceAll("(?sm)\"?([^\"]*(\"{2})*[^\"]*)\"?.*,",
 										"$1");
 					str = str.replaceAll("(?sm)(\"(\"))", "$2");
-					cells.add(str);
-					if(iRowNo == 0){
-						colNo.put(str, iColNo);
+					if(iRowNo == 0 ){
+						addHead(str);
 					}
-					if(iRowNo != 0 && iColNo ==0){
-						rowNo.put(str, iRowNo);
-					}
-					iColNo++;
+					add(str);
 				}
 				iRowNo++;
-				listFile.add(cells);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -105,7 +105,6 @@ public class CSVAnalysis {
 				br.close();
 			}
 		}
-		return listFile;
 	}
 
 	public static void main(String[] args) throws Throwable {
@@ -114,7 +113,7 @@ public class CSVAnalysis {
 		Path p = pm.getPath("allmarket_wy");
 		DownLoad.downLoanPath(p,"600535");
 		CSVAnalysis parser = new CSVAnalysis(p.getM());
-		List<List<String>> list = parser.listFile;
+		List<List<String>> list = parser.getTabList();
 		for (List<String> liststr : list){
 			for (String string : liststr) {
 				System.out.print(string + "\t");
@@ -122,8 +121,8 @@ public class CSVAnalysis {
 			System.out.println();
 		}
 		System.out.println("==================");
-		System.out.println(parser.colNo);
+		System.out.println(parser.getICol());
 		System.out.println("==================");
-		System.out.println(parser.rowNo);
+		System.out.println(parser.getICol());
 	}
 }

@@ -1,12 +1,12 @@
 package rating;
 
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import parameter.Para;
+import org.joda.time.DateTime;
 
+import parameter.Para;
 import stock.NxRatingInfo;
 import stock.StockInfo1;
 import tool.DateUtil;
@@ -42,18 +42,10 @@ public class RunRating {
 	 */
 	public boolean checkDate(){
 		System.out.println("当前设置日期为:"+Para.getDate());
-		System.out.println("当前时间为:"+StringFunction.getTodayNow());
-		String sYesterday = null;
-		String sToday = StringFunction.getToday();
-		try {
-			sYesterday = DateUtil.getYesterday();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		if(!DateUtil.simplyValidate(Para.getDate(),"/")){
-			System.out.println("日期格式错误！！！");
-			return false;
-		}
+		System.out.println("当前时间为:"+DateUtil.getNowTime());
+		String sYesterday = DateTime.now().plusDays(-1).toString();
+		String sToday = DateTime.now().toString("YYYY");
+		
 		if(Para.getDate().equals(sYesterday)){
 			System.out.println("设置日期为昨天");
 			System.out.println("当前时间为"+StringFunction.getNow());
@@ -73,7 +65,7 @@ public class RunRating {
 			System.out.println("小于19:10:00，设置日期为今天，不可获取");
 			return false;
 		}else{
-			System.out.println("当前时间为"+StringFunction.getTodayNow()+"，无法获取"+Para.getDate()+"数据");
+			System.out.println("当前时间为"+DateUtil.getNowTime()+"，无法获取"+Para.getDate()+"数据");
 			return false;
 		}
 	}

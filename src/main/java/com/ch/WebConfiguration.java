@@ -15,7 +15,10 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Configuration
+@Slf4j
 public class WebConfiguration {
     @Bean
     public RemoteIpFilter remoteIpFilter() {
@@ -45,7 +48,7 @@ public class WebConfiguration {
 				throws IOException, ServletException {
 			// TODO Auto-generated method stub
 			HttpServletRequest request = (HttpServletRequest) srequest;
-			System.out.println("this is MyFilter,url :"+request.getRequestURI());
+			log.debug("this is MyFilter,url :"+request.getRequestURI());
 			filterChain.doFilter(srequest, sresponse);
 		}
 

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+
+	<div id="stock-pegs" th:fragment="stock-pegs">
+		<div class="block-header">
+			<h2 >
+				个股详情
+			</h2>
+		</div>
+		<!-- Basic Examples -->
+		<div class="row clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div class="card">
+					<div class="header">
+						<h2  th:text="*{stockname}">stockname </h2>
+						<ul class="header-dropdown m-r--5">
+							<li class="dropdown">
+								<a href="javascript:void(0);"
+									class="dropdown-toggle" data-toggle="dropdown" role="button"
+									aria-haspopup="true" aria-expanded="false"> <i
+										class="material-icons">more_vert</i>
+								</a>
+								<ul class="dropdown-menu pull-right">
+									<li><a th:href="@{http://basic.10jqka.com.cn/{stockid}/(stockid = ${stockid})}" target="_blank">同花顺F10</a></li>
+									<li><a th:href="@{https://xueqiu.com/S/{stockhead}{stockid}/(stockid = ${stockid},stockhead = ${stockhead})}" target="_blank">雪球论坛</a></li>
+									<li><a th:href="@{http://app.finance.ifeng.com/data/stock/tab_cwzb.php?symbol={stockid}(stockid = ${stockid})}" target="_blank">凤凰财经</a></li>
+								</ul></li>
+						</ul>
+					</div>
+					<div class="body">
+						<div class="table-responsive">
+							<table id="stock-pegs-table"
+								class="table table-bordered table-striped table-hover js-basic-example dataTable">
+								<thead>
+									<tr>
+										<th>日期</th>
+										<th>价格</th>
+										<th>利润</th>
+										<th>增长率</th>
+										<th>PE指数</th>
+										<th>PEG指数</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>日期</th>
+										<th>价格</th>
+										<th>利润</th>
+										<th>增长率</th>
+										<th>PE指数</th>
+										<th>PEG指数</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+	<!-- Jquery Core Js -->
+   	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+	<!-- <script
+	src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> -->
+	
+	<script th:src="@{plugins/jquery-datatable/jquery.dataTables.js}"></script>
+
+	<script th:src="@{js/stock/stock.js}"></script>
+		
+	<!-- #END# Basic Examples -->
+
+
+</body>
+</html>

@@ -18,22 +18,20 @@ public class PathMap {
 		if (Path != null) {
 			return Path;
 		} else {
-			File in = new File(System.getProperty("user.dir")
-					+ "\\src\\main\\resources\\dlconfig.xml");
+			File in = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\dlconfig.xml");
 			Document doc = Jsoup.parse(in, "UTF-8");
 			Path = new PathImpl(doc.select("#" + id));
 			pMap.put(id, Path);
 		}
 		return Path;
 	}
-	
+
 	public static synchronized Path getPara(String id) throws IOException {
 		Path Path = pMap.get(id);
 		if (Path != null) {
 			return Path;
 		} else {
-			File in = new File(System.getProperty("user.dir")
-			                   + "\\WebContent\\WEB-INF\\etc\\dlconfig.xml");
+			File in = new File(System.getProperty("user.dir") + "\\src\\main\\resources\\dlconfig.xml");
 			Document doc = Jsoup.parse(in, "UTF-8");
 			Path = new PathImpl(doc.select("#" + id));
 			pMap.put(id, Path);

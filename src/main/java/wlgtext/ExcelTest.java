@@ -1,42 +1,23 @@
 package wlgtext;
 
 import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-
 import java.io.File;
-
 import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
-
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
+import java.io.InputStream;
 import java.text.DecimalFormat;
-
 import java.text.SimpleDateFormat;
-
 import java.util.ArrayList;
-
 import java.util.Arrays;
-
 import java.util.Date;
-
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
-
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-
 import org.apache.poi.hssf.usermodel.HSSFRow;
-
 import org.apache.poi.hssf.usermodel.HSSFSheet;
-
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 public class ExcelTest {
@@ -87,44 +68,30 @@ public class ExcelTest {
 
 	/**
 	 * 
-	 * 璇诲彇Excel鐨勫唴瀹癸紝绗竴缁存暟缁勫瓨鍌ㄧ殑鏄竴琛屼腑鏍煎垪鐨勫�硷紝浜岀淮鏁扮粍瀛樺偍鐨勬槸澶氬皯涓
+	 * 读取Excel的内容，第一维数组存储的是一行中格列的值，二维数组存储的是多少个行
 	 * 
-	 * @param file
-	 *            璇诲彇鏁版嵁鐨勬簮Excel
-	 * 
-	 * @param ignoreRows
-	 *            璇诲彇鏁版嵁蹇界暐鐨勮鏁帮紝姣斿柣琛屽ご涓嶉渶瑕佽鍏� 蹇界暐鐨勮鏁颁负1
-	 * 
-	 * @return 璇诲嚭鐨凟xcel涓暟鎹殑鍐呭
-	 * 
+	 * @param file  读取数据的源Excel
+	 * @param ignoreRows 读取数据忽略的行数，比喻行头不需要读入 忽略的行数为1
+	 * @return 读出的Excel中数据的内容
 	 * @throws FileNotFoundException
-	 * 
 	 * @throws IOException
 	 */
 
 	@SuppressWarnings("deprecation")
-	public static String[][] getData(File file, int ignoreRows)
-
-	throws FileNotFoundException, IOException {
+	public static String[][] getData(File file, int ignoreRows) throws FileNotFoundException, IOException {
 
 		List<String[]> result = new ArrayList<String[]>();
-
 		int rowSize = 0;
+		BufferedInputStream in = new BufferedInputStream(new FileInputStream(file));
 
-		BufferedInputStream in = new BufferedInputStream(new FileInputStream(
-
-		file));
-
-		// 鎵撳紑HSSFWorkbook
+		// 打开HSSFWorkbook
 		POIFSFileSystem fs = new POIFSFileSystem(in);
-
 		HSSFWorkbook wb = new HSSFWorkbook(fs);
-
 		HSSFCell cell = null;
 
 		for (int sheetIndex = 0; sheetIndex < wb.getNumberOfSheets(); sheetIndex++) {
 			HSSFSheet st = wb.getSheetAt(sheetIndex);
-			// 绗竴琛屼负鏍囬锛屼笉鍙�
+			// 第一行为标题，不取
 			for (int rowIndex = ignoreRows; rowIndex <= st.getLastRowNum(); rowIndex++) {
 				HSSFRow row = st.getRow(rowIndex);
 				if (row == null) {
@@ -140,110 +107,81 @@ public class ExcelTest {
 				Arrays.fill(values, "");
 				boolean hasValue = false;
 				for (short columnIndex = 0; columnIndex <= row.getLastCellNum(); columnIndex++) {
-					String value = "";
-					cell = row.getCell(columnIndex);
-					if (cell != null) {
-						// 娉ㄦ剰锛氫竴瀹氳璁炬垚杩欎釜锛屽惁鍒欏彲鑳戒細鍑虹幇涔辩爜
-						switch (cell.getCellType()) {
-						case HSSFCell.CELL_TYPE_STRING:
-							value = cell.getStringCellValue();
-							break;
-						case HSSFCell.CELL_TYPE_NUMERIC:
-							if (HSSFDateUtil.isCellDateFormatted(cell)) {
-								Date date = cell.getDateCellValue();
-								if (date != null) {
-									value = new SimpleDateFormat("yyyy-MM-dd")
-									.format(date);
-								} else {
-									value = "";
-								}
-
-							} else {
-
-								value = new DecimalFormat("0").format(cell
-
-								.getNumericCellValue());
-
-							}
-
-							break;
-
-						case HSSFCell.CELL_TYPE_FORMULA:
-
-							// 瀵煎叆鏃跺鏋滀负鍏紡鐢熸垚鐨勬暟鎹垯鏃犲��
-
-							if (!cell.getStringCellValue().equals("")) {
-
-								value = cell.getStringCellValue();
-
-							} else {
-
-								value = cell.getNumericCellValue() + "";
-
-							}
-
-							break;
-
-						case HSSFCell.CELL_TYPE_BLANK:
-
-							break;
-
-						case HSSFCell.CELL_TYPE_ERROR:
-
-							value = "";
-
-							break;
-
-						case HSSFCell.CELL_TYPE_BOOLEAN:
-
-							value = (cell.getBooleanCellValue() == true ? "Y"
-
-							: "N");
-
-							break;
-
-						default:
-
-							value = "";
-
-						}
-
-					}
+					String value = getCellValue(row, columnIndex);
 
 					if (columnIndex == 0 && value.trim().equals("")) {
-
 						break;
-
 					}
 
 					values[columnIndex] = rightTrim(value);
-
 					hasValue = true;
-
 				}
 
 				if (hasValue) {
-
 					result.add(values);
-
 				}
-
 			}
-
 		}
-
 		in.close();
 
 		String[][] returnArray = new String[result.size()][rowSize];
 
 		for (int i = 0; i < returnArray.length; i++) {
-
 			returnArray[i] = (String[]) result.get(i);
-
 		}
-
 		return returnArray;
+	}
 
+	private static String getCellValue(HSSFRow row, short columnIndex) {
+		HSSFCell cell;
+		String value = "";
+		cell = row.getCell(columnIndex);
+		if (cell != null) {
+			// 注意：一定要设成这个，否则可能会出现乱码
+			switch (cell.getCellType()) {
+			case HSSFCell.CELL_TYPE_STRING:
+				value = cell.getStringCellValue();
+				break;
+			case HSSFCell.CELL_TYPE_NUMERIC:
+				if (HSSFDateUtil.isCellDateFormatted(cell)) {
+					Date date = cell.getDateCellValue();
+					if (date != null) {
+						value = new SimpleDateFormat("yyyy-MM-dd")
+						.format(date);
+					} else {
+						value = "";
+					}
+				} else {
+					value = new DecimalFormat("0").format(cell
+					.getNumericCellValue());
+				}
+				break;
+	
+			case HSSFCell.CELL_TYPE_FORMULA:
+				// 导入时如果为公式生成的数据则无值
+				if (!cell.getStringCellValue().equals("")) {
+					value = cell.getStringCellValue();
+				} else {
+					value = cell.getNumericCellValue() + "";
+				}
+				break;
+	
+			case HSSFCell.CELL_TYPE_BLANK:
+				break;
+	
+			case HSSFCell.CELL_TYPE_ERROR:
+				value = "";
+				break;
+	
+			case HSSFCell.CELL_TYPE_BOOLEAN:
+				value = (cell.getBooleanCellValue() == true ? "Y" : "N");
+				break;
+	
+			default:
+				value = "";
+			}
+		}
+		return value;
 	}
 
 	@SuppressWarnings("deprecation")
@@ -263,7 +201,7 @@ public class ExcelTest {
 
 			HSSFSheet st = wb.getSheetAt(sheetIndex);
 
-			// 绗竴琛屼负鏍囬锛屼笉鍙�
+			// 第一行为标题，不取
 
 			for (int rowIndex = ignoreRows; rowIndex <= st.getLastRowNum(); rowIndex++) {
 
@@ -291,91 +229,7 @@ public class ExcelTest {
 
 				for (short columnIndex = 0; columnIndex <= row.getLastCellNum(); columnIndex++) {
 
-					String value = "";
-
-					cell = row.getCell(columnIndex);
-
-					if (cell != null) {
-
-						// 娉ㄦ剰锛氫竴瀹氳璁炬垚杩欎釜锛屽惁鍒欏彲鑳戒細鍑虹幇涔辩爜
-
-						switch (cell.getCellType()) {
-
-						case HSSFCell.CELL_TYPE_STRING:
-
-							value = cell.getStringCellValue();
-
-							break;
-
-						case HSSFCell.CELL_TYPE_NUMERIC:
-
-							if (HSSFDateUtil.isCellDateFormatted(cell)) {
-
-								Date date = cell.getDateCellValue();
-
-								if (date != null) {
-
-									value = new SimpleDateFormat("yyyy-MM-dd")
-
-									.format(date);
-
-								} else {
-
-									value = "";
-
-								}
-
-							} else {
-
-								value = new DecimalFormat("0").format(cell
-
-								.getNumericCellValue());
-
-							}
-
-							break;
-
-						case HSSFCell.CELL_TYPE_FORMULA:
-
-							// 瀵煎叆鏃跺鏋滀负鍏紡鐢熸垚鐨勬暟鎹垯鏃犲��
-
-							if (!cell.getStringCellValue().equals("")) {
-
-								value = cell.getStringCellValue();
-
-							} else {
-
-								value = cell.getNumericCellValue() + "";
-
-							}
-
-							break;
-
-						case HSSFCell.CELL_TYPE_BLANK:
-
-							break;
-
-						case HSSFCell.CELL_TYPE_ERROR:
-
-							value = "";
-
-							break;
-
-						case HSSFCell.CELL_TYPE_BOOLEAN:
-
-							value = (cell.getBooleanCellValue() == true ? "Y"
-
-							: "N");
-
-							break;
-
-						default:
-
-							value = "";
-
-						}
-
-					}
+					String value = getCellValue(row, columnIndex);
 
 					if (columnIndex == 0 && value.trim().equals("")) {
 
@@ -414,12 +268,12 @@ public class ExcelTest {
 
 	/**
 	 * 
-	 * 鍘绘帀瀛楃涓插彸杈圭殑绌烘牸
+	 * 去掉字符串右边的空格
 	 * 
 	 * @param str
-	 *            瑕佸鐞嗙殑瀛楃涓�
+	 *            要处理的字符串
 	 * 
-	 * @return 澶勭悊鍚庣殑瀛楃涓�
+	 * @return 处理后的字符串
 	 */
 
 	public static String rightTrim(String str) {

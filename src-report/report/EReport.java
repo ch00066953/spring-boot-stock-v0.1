@@ -3,16 +3,22 @@ package report;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.util.StopWatch;
 
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import lombok.extern.slf4j.Slf4j;
+import tool.DateUtil;
 import tool.StringX;
 import tool.fileAnalysis.bean.TableBean;
 
+@Slf4j
 public class EReport extends TableBean{
 	public Workbook book;
 	private int sheetPage = 0;
@@ -21,32 +27,31 @@ public class EReport extends TableBean{
 	private int iFristY = 0;
 
 	public EReport() {
-		// TODO Auto-generated constructor stub
 	}
 	public EReport(String sPath) {
 		 try {
 			getReport(sPath);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BiffException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	public void getReport(String sPath) throws FileNotFoundException,
 			BiffException, IOException {
+
 		File file = new File(sPath);
 		book = Workbook.getWorkbook(file);
 		setSheet(sheetPage);
+
 		
 	}
 
 	private void initCell() {
+
 		for (; iCol < sheet.getColumns(); ) {
 			String sCol = getColName(iCol);
 			if(StringX.isEmpty(sCol)){
@@ -67,7 +72,7 @@ public class EReport extends TableBean{
 			for(int i = 0; i < iCol; i++){
 				
 				add(getSheetCell(r, i));
-				System.out.println(r+","+i);
+//				System.out.println(r+","+i);
 			}
 		}
 	}
@@ -115,15 +120,17 @@ public class EReport extends TableBean{
 		return iFristY;
 	}
 	
-	public int getYearNo(int i){
+	public int getYearNo(int i) throws ParseException{
 		i -= 1;
-		int yearNo = iFristY + 4 * i ;
+		i = -i;
+		String year = DateUtil.getRelativeDate(sFristY, i, 0, 0,"YYYY-MM-dd");
+		int yearNo = getCol(year);
 		if (yearNo > colno.size())
 			return 0;
 		return yearNo;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		String sPath = "F:\\002450.xls";
 		EReport er = new EReport(sPath);
 		String a = er.getCell("净利润同比增长率", "2013-09-30");

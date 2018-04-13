@@ -20,11 +20,11 @@ public class MailTest {
         // Step 1:  Configure the mail session
         System.out.println("Configuring mail session for: " + smtpHost);
         java.util.Properties props = new java.util.Properties();
-        props.setProperty("mail.smtp.auth", "true");//鎸囧畾鏄惁闇�瑕丼MTP楠岃瘉
-        props.setProperty("mail.smtp.host", smtpHost);//鎸囧畾SMTP鏈嶅姟鍣�
+        props.setProperty("mail.smtp.auth", "true");//指定是否需要SMTP验证
+        props.setProperty("mail.smtp.host", smtpHost);//指定SMTP服务器
         props.put("mail.transport.protocol", "smtp");
         Session mailSession = Session.getDefaultInstance(props);
-        mailSession.setDebug(true);//鏄惁鍦ㄦ帶鍒跺彴鏄剧ずdebug淇℃伅
+        mailSession.setDebug(true);//是否在控制台显示debug信息
 
         // Step 2:  Construct the message
         System.out.println("Constructing message -  from=" + from + "  to=" + to);
@@ -51,11 +51,11 @@ public class MailTest {
     }
 
     /**
-     * 閿欒淇℃伅閭欢
+     * 错误信息邮件
      * @param error
      */
     public static void sendError(String error){
-         String subject = "閿欒淇℃伅锛�"; //subject javamail鑷姩杞爜
+         String subject = "错误信息！"; //subject javamail自动转码
 
          try {
              MailTest.sendMessage(smtpHost, from, to, subject, error);
@@ -69,7 +69,7 @@ public class MailTest {
     }
     
     /**
-     * 鎻愮ず淇℃伅閭欢
+     * 提示信息邮件
      * @param subject
      * @param messageText
      */
@@ -90,12 +90,12 @@ public class MailTest {
         String smtpHost = "smtp.sina.com";
         String from = "ch000669531@sina.com";
         String to = "1026768953@qq.com";
-        String subject = "html"; //subject javamail鑷姩杞爜
+        String subject = "html"; //subject javamail自动转码
 
         StringBuffer theMessage = new StringBuffer();
-        //theMessage.append("<h2><font color=\"red\">杩欏�掗湁瀛╁瓙</font></h2>");
+        //theMessage.append("<h2><font color=\"red\">这倒霉孩子</font></h2>");
         //theMessage.append("<hr>");
-        //theMessage.append("<i>骞村勾澶辨湜骞村勾鏈�</i>");
+        //theMessage.append("<i>年年失望年年望</i>");
         theMessage.append("<a href=http://aaa/>aaa</a>");
 
         try {

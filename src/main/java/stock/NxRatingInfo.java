@@ -4,16 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import parameter.Para;
-
-import tool.DateUtil;
-import tool.StringFunction;
-
 import connect.JdbcConnect;
+import parameter.Para;
 /**
  * 评级
  * @author lgwang

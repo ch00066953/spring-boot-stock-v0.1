@@ -1,6 +1,23 @@
 $(function () {
     $('.js-basic-example').DataTable({
-        responsive: true
+        responsive: true,
+        "ajax" : {
+			dataType: 'json',
+            url: "/datastock"
+        },
+		"columns" : [ {
+			"data" : "ID"
+		}, {
+			"data" : "name"
+		}, {
+			"data" : "industry2"
+		}, {
+			"data" : "netrate"
+		}, {
+			"data" : "peg"
+		}, {
+			"data" : "score"
+		} ]
     });
 
     //Exportable table
