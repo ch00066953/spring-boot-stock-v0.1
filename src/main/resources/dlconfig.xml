@@ -125,7 +125,7 @@
 			<main>E:\\stock\\compareallpeg\\main\\compareallpeg.csv</main>
 			<remark>peg得分比较</remark>
 		</path>
-		
+
 		<path id ="compareallpeghis">
 			<name>pegs</name>
 			<url>http://basic.10jqka.com.cn/{$stock}/worth.html</url>
