@@ -4,11 +4,12 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ch.service.webcrawler.HttpUtil;
+
 import tool.DateUtils;
 import tool.SqlTool;
 import tool.StringFunction;
 import tool.StringX;
-import tool.fileAnalysis.HttpUtil;
 
 public class Para {
 

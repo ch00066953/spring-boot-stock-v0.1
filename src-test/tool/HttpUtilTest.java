@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import tool.fileAnalysis.HttpUtil;
+import com.ch.service.webcrawler.HttpUtil;
 
 public class HttpUtilTest {
 
@@ -75,6 +75,12 @@ public class HttpUtilTest {
 				"http://query.sse.com.cn/security/stock/downloadStockListFile.do?csrcCode=&stockCode=&areaName=&stockType=1",
 				headerMap,
 				"f:\\0000022.xls","f:\\0000023.xls");
+	}
+	
+	@Test
+	public void testIP(){
+		HttpUtil HttpUtil = new HttpUtil();
+		//HttpUtil.checkIP();
 	}
 
 }

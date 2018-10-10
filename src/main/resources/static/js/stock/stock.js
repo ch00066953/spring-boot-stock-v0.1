@@ -1,11 +1,18 @@
 $.fn.dataTable.ext.errMode = 'none'; //不显示任何错误信息
-
+var stockTable ;
 $(document).ready(function () {
+	$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+        $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+    } );
+	
 	stockid = $.cookie('stockid');
-	var table = $('#stock-pegs-table').DataTable({
+	stockTable = $('#stock-pegs-table').DataTable({
 		"language": {
             url: "/zh_CN.json"
         },
+        "fnInitComplete": function() {
+            this.fnAdjustColumnSizing(true);
+         },
 		/* "processing": true,
         "serverSide": true, */
 		"ajax" : {
@@ -26,6 +33,9 @@ $(document).ready(function () {
 			"data" : "最高PEG"
 		} ]
 	});
-	table.order( [ 0, 'desc' ] ).draw();
+	/*$(window).bind('resize', function () {
+		stockTable.fnAdjustColumnSizing(true);
+	} );*/
+	stockTable.order( [ 0, 'desc' ] ).draw();
 });
 

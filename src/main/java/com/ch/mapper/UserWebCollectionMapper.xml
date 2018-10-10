@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ch.mapper.UserWebCollectionMapper">
   <resultMap id="BaseResultMap" type="com.ch.pojo.UserWebCollection">
-    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="website" jdbcType="VARCHAR" property="website" />
+    <result column="mainstie" jdbcType="VARCHAR" property="mainstie" />
     <result column="iconsite" jdbcType="VARCHAR" property="iconsite" />
     <result column="webtitle" jdbcType="VARCHAR" property="webtitle" />
     <result column="description" jdbcType="VARCHAR" property="description" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, title, website, iconsite, webtitle, description, keywords, userid, usertype, 
-    systemtype, status
+    id, title, website, mainstie, iconsite, webtitle, description, keywords, userid, 
+    usertype, systemtype, status
   </sql>
   <select id="selectByExample" parameterType="com.ch.pojo.UserWebCollectionExample" resultMap="BaseResultMap">
     select
@@ -90,15 +91,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from user_web_collection
-    where ID = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_web_collection
-    where ID = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ch.pojo.UserWebCollectionExample">
     delete from user_web_collection
@@ -107,26 +108,31 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ch.pojo.UserWebCollection">
-    insert into user_web_collection (ID, title, website, 
-      iconsite, webtitle, description, 
-      keywords, userid, usertype, 
-      systemtype, status)
-    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
-      #{iconsite,jdbcType=VARCHAR}, #{webtitle,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{keywords,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{usertype,jdbcType=VARCHAR}, 
-      #{systemtype,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
+    insert into user_web_collection (id, title, website, 
+      mainstie, iconsite, webtitle, 
+      description, keywords, userid, 
+      usertype, systemtype, status
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{mainstie,jdbcType=VARCHAR}, #{iconsite,jdbcType=VARCHAR}, #{webtitle,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, 
+      #{usertype,jdbcType=VARCHAR}, #{systemtype,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.ch.pojo.UserWebCollection">
     insert into user_web_collection
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        ID,
+        id,
       </if>
       <if test="title != null">
         title,
       </if>
       <if test="website != null">
         website,
+      </if>
+      <if test="mainstie != null">
+        mainstie,
       </if>
       <if test="iconsite != null">
         iconsite,
@@ -155,13 +161,16 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=INTEGER},
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
       <if test="website != null">
         #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="mainstie != null">
+        #{mainstie,jdbcType=VARCHAR},
       </if>
       <if test="iconsite != null">
         #{iconsite,jdbcType=VARCHAR},
@@ -199,13 +208,16 @@
     update user_web_collection
     <set>
       <if test="record.id != null">
-        ID = #{record.id,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.website != null">
         website = #{record.website,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainstie != null">
+        mainstie = #{record.mainstie,jdbcType=VARCHAR},
       </if>
       <if test="record.iconsite != null">
         iconsite = #{record.iconsite,jdbcType=VARCHAR},
@@ -238,9 +250,10 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update user_web_collection
-    set ID = #{record.id,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=INTEGER},
       title = #{record.title,jdbcType=VARCHAR},
       website = #{record.website,jdbcType=VARCHAR},
+      mainstie = #{record.mainstie,jdbcType=VARCHAR},
       iconsite = #{record.iconsite,jdbcType=VARCHAR},
       webtitle = #{record.webtitle,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
@@ -261,6 +274,9 @@
       </if>
       <if test="website != null">
         website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="mainstie != null">
+        mainstie = #{mainstie,jdbcType=VARCHAR},
       </if>
       <if test="iconsite != null">
         iconsite = #{iconsite,jdbcType=VARCHAR},
@@ -287,12 +303,13 @@
         status = #{status,jdbcType=VARCHAR},
       </if>
     </set>
-    where ID = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.ch.pojo.UserWebCollection">
     update user_web_collection
     set title = #{title,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
+      mainstie = #{mainstie,jdbcType=VARCHAR},
       iconsite = #{iconsite,jdbcType=VARCHAR},
       webtitle = #{webtitle,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
@@ -301,6 +318,6 @@
       usertype = #{usertype,jdbcType=VARCHAR},
       systemtype = #{systemtype,jdbcType=VARCHAR},
       status = #{status,jdbcType=VARCHAR}
-    where ID = #{id,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

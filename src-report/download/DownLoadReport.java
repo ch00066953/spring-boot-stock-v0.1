@@ -3,10 +3,11 @@ package download;
 import java.io.File;
 import java.util.List;
 
+import com.ch.service.webcrawler.HttpUtil;
+
 import stock.StockInfo1;
 import tool.DateUtil;
 import tool.DownLoad;
-import tool.fileAnalysis.HttpUtil;
 
 public class DownLoadReport {
 	

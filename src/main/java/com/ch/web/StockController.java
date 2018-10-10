@@ -73,11 +73,10 @@ public class StockController {
 		if(s != null){
 			
 			Cookie cookie = new Cookie("stockid", id.trim());
-			cookie.setMaxAge(30 * 60);// 设置为30min
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			cookie = new Cookie("stockname", s.getCompabbre().replace(" ", ""));
-			cookie.setMaxAge(30 * 60);// 设置为30min
+			cookie.setMaxAge(60 * 60);// 设置为30min
 			cookie.setPath("/");
 			response.addCookie(cookie);
 			System.out.println("已添加===============");
@@ -86,9 +85,11 @@ public class StockController {
 		}else{
 			Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
 	        if (null==cookies) {
-	            System.out.println("没有cookie=========");
+	            log.error("没有cookie=========");
+	            return "home";
 	        } else {
 	            for(Cookie cookie : cookies){
+	    			cookie.setMaxAge(60 * 60);// 设置为30min
 	            	if(cookie.getName().equals("stockid"))
 	            		model.addAttribute("stockid", cookie.getValue());
 	            	if(cookie.getName().equals("stockname"))
@@ -102,5 +103,51 @@ public class StockController {
 			model.addAttribute("stockhead", "SZ");
 		
 		return "pages/stock";
+	}
+	
+	@RequestMapping(value="/growth",method = RequestMethod.GET )
+	public String getStockGrowth(HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
+		Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+		if (null==cookies) {
+			log.error("没有cookie=========");
+			return "home";
+		} else {
+			for(Cookie cookie : cookies){
+				cookie.setMaxAge(60 * 60);// 设置为30min
+				if(cookie.getName().equals("stockid"))
+					model.addAttribute("stockid", cookie.getValue());
+				if(cookie.getName().equals("stockname"))
+					model.addAttribute("stockname", cookie.getValue());
+			}
+		}
+		if(model.asMap().get("stockid").toString().startsWith("6"))
+			model.addAttribute("stockhead", "SH");
+		else
+			model.addAttribute("stockhead", "SZ");
+		
+		return "pages/growth";
+	}
+	
+	@RequestMapping(value="/tab",method = RequestMethod.GET )
+	public String getStocktab(HttpServletRequest request,HttpServletResponse response, Model model) throws Exception {
+		Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+		if (null==cookies) {
+			log.error("没有cookie=========");
+			return "home";
+		} else {
+			for(Cookie cookie : cookies){
+				cookie.setMaxAge(60 * 60);// 设置为30min
+				if(cookie.getName().equals("stockid"))
+					model.addAttribute("stockid", cookie.getValue());
+				if(cookie.getName().equals("stockname"))
+					model.addAttribute("stockname", cookie.getValue());
+			}
+		}
+		if(model.asMap().get("stockid").toString().startsWith("6"))
+			model.addAttribute("stockhead", "SH");
+		else
+			model.addAttribute("stockhead", "SZ");
+		
+		return "pages/stock-tab";
 	}
 }

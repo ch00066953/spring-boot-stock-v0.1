@@ -1,15 +1,11 @@
 package com.ch.service;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ch.mapper.StockInfoMapper;
@@ -17,7 +13,6 @@ import com.ch.pojo.StockInfo;
 
 import download.Path;
 import download.PathMap;
-import tool.DownLoad;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

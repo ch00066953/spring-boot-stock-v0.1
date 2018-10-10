@@ -24,6 +24,11 @@ import tool.StringX;
 import tool.fileAnalysis.CSVUtils;
 import tool.fileAnalysis.bean.TableBean;
 
+/**
+ * compareallpeg评分算法
+ * @author admin
+ *
+ */
 @Service
 @Slf4j
 public class CompareStock {

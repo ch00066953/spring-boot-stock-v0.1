@@ -3,6 +3,9 @@ package com.ch.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class UserWebCollectionExample {
     protected String orderByClause;
 
@@ -105,72 +108,62 @@ public class UserWebCollectionExample {
         }
 
         public Criteria andIdIsNull() {
-            addCriterion("ID is null");
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
         public Criteria andIdIsNotNull() {
-            addCriterion("ID is not null");
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(String value) {
-            addCriterion("ID =", value, "id");
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(String value) {
-            addCriterion("ID <>", value, "id");
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(String value) {
-            addCriterion("ID >", value, "id");
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(String value) {
-            addCriterion("ID >=", value, "id");
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(String value) {
-            addCriterion("ID <", value, "id");
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(String value) {
-            addCriterion("ID <=", value, "id");
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLike(String value) {
-            addCriterion("ID like", value, "id");
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotLike(String value) {
-            addCriterion("ID not like", value, "id");
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<String> values) {
-            addCriterion("ID in", values, "id");
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<String> values) {
-            addCriterion("ID not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(String value1, String value2) {
-            addCriterion("ID between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(String value1, String value2) {
-            addCriterion("ID not between", value1, value2, "id");
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
@@ -311,6 +304,76 @@ public class UserWebCollectionExample {
 
         public Criteria andWebsiteNotBetween(String value1, String value2) {
             addCriterion("website not between", value1, value2, "website");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieIsNull() {
+            addCriterion("mainstie is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieIsNotNull() {
+            addCriterion("mainstie is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieEqualTo(String value) {
+            addCriterion("mainstie =", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieNotEqualTo(String value) {
+            addCriterion("mainstie <>", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieGreaterThan(String value) {
+            addCriterion("mainstie >", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieGreaterThanOrEqualTo(String value) {
+            addCriterion("mainstie >=", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieLessThan(String value) {
+            addCriterion("mainstie <", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieLessThanOrEqualTo(String value) {
+            addCriterion("mainstie <=", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieLike(String value) {
+            addCriterion("mainstie like", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieNotLike(String value) {
+            addCriterion("mainstie not like", value, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieIn(List<String> values) {
+            addCriterion("mainstie in", values, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieNotIn(List<String> values) {
+            addCriterion("mainstie not in", values, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieBetween(String value1, String value2) {
+            addCriterion("mainstie between", value1, value2, "mainstie");
+            return (Criteria) this;
+        }
+
+        public Criteria andMainstieNotBetween(String value1, String value2) {
+            addCriterion("mainstie not between", value1, value2, "mainstie");
             return (Criteria) this;
         }
 

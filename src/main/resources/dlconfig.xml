@@ -34,7 +34,7 @@
 			<url>http://ichart.finance.yahoo.com/table.csv?s={$stockall}</url><!--需要ss sz  -->
 			<day>E:\\stock\\allmarket_yh\\{$today}\\{$stock}.csv</day>
 			<main>E:\\stock\\allmarket_yh\\main\\{$stock}.csv</main>
-			<remark>每日市价数据.雅虎，2018年发行不能用了</remark>
+			<remark>每日市价数据.雅虎，2018年发现不能用了</remark>
 		</path>
 		
 		<path id ="allmarket_wy">
@@ -43,6 +43,16 @@
 			<day>E:\\stock\\allmarket_wy\\{$today}\\{$stock}.csv</day>
 			<main>E:\\stock\\allmarket_wy\\main\\{$stock}.csv</main>
 			<remark>每日市价数据.网易</remark>
+		</path>
+		
+		
+		<path id ="allmarket_sh">
+			<name>allmarket_sh</name>
+			<url>http://q.stock.sohu.com/hisHq?code=cn_{$stock}&amp;start={$begindate}&amp;end={$enddate}&amp;stat=1&amp;order=D&amp;period=d&amp;callback=historySearchHandler&amp;rt=jsonp</url><!--需要ss sz  -->
+			<day>E:\\stock\\allmarket_sh\\{$today}\\{$stock}.csv</day>
+			<main>E:\\stock\\allmarket_sh\\main\\{$stock}.csv</main>
+			<matedata>日期,开盘,收盘,涨跌额,涨跌幅,最低价,最高价,成交量,成交金额,换手率,</matedata><!-- 2018/05/18 -->
+			<remark>每日市价数据.搜狐</remark>
 		</path>
 		
 		<path id ="capital">
@@ -105,7 +115,7 @@
 		<path id ="ipproxyinit">
 			<name>ipproxyinit</name>
 			<url>http://www.goubanjia.com/</url>
-			<day>E:\\stock\\ipproxy\\{$today}\\{$today}_ipproxy.csv</day>time
+			<day>E:\\stock\\ipproxy\\{$today}\\{$time}_ipproxy.csv</day>
 			<main>E:\\stock\\ipproxy\\main\\ipproxy.csv</main>
 			<remark>代理ip初始化</remark>
 		</path>

@@ -3,6 +3,9 @@ package com.ch.pojo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class StockInfoExample {
     protected String orderByClause;
 

@@ -2,9 +2,10 @@ package download;
 
 import java.util.List;
 
+import com.ch.service.webcrawler.HttpUtil;
+
 import stock.StockInfo1;
 import tool.StringFunction;
-import tool.fileAnalysis.HttpUtil;
 import tool.rep.Replace;
 
 public class DownLoadMarket {

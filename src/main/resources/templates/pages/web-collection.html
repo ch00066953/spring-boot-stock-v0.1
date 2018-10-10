@@ -1,0 +1,45 @@
+﻿<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layouts">
+<head th:include="layouts :: htmlhead" th:with="title='stock'">
+
+</head>
+<body>
+	<section layout:fragment="contentf">
+		<div class="container-fluid">
+            <div class="block-header">
+                <h2>主要收藏</h2>
+            </div>
+            <!-- Default Media -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                               	 资讯网站
+                            </h2>
+                        </div>
+                        <div class="body" th:each="l : ${list}">
+                            <div class="media" >
+                                <div class="media-left">
+                                    <a th:href="${l.website}" target="_blank">
+                                        <img class="media-object" th:src="${l.iconsite}" width="32" height="32">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                	<a th:href="${l.website}" target="_blank">
+                                   		 <h4 class="media-heading" th:text="*{l.title}" >雪球</h4> 
+                                    </a>
+                                    <span th:text="*{l.description}">刷刷雪球再下单,买卖股票才心安 - 雪球提供沪深港美股票实时行情、实战交流、实盘交易。</span>
+                                 	   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Default Media -->
+         </div>
+	</section>
+	
+	
+</body>
+</html>

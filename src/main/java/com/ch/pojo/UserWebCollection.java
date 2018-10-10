@@ -1,11 +1,13 @@
 package com.ch.pojo;
 
 public class UserWebCollection {
-    private String id;
+    private Integer id;
 
     private String title;
 
     private String website;
+
+    private String mainstie;
 
     private String iconsite;
 
@@ -23,12 +25,12 @@ public class UserWebCollection {
 
     private String status;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -45,6 +47,14 @@ public class UserWebCollection {
 
     public void setWebsite(String website) {
         this.website = website == null ? null : website.trim();
+    }
+
+    public String getMainstie() {
+        return mainstie;
+    }
+
+    public void setMainstie(String mainstie) {
+        this.mainstie = mainstie == null ? null : mainstie.trim();
     }
 
     public String getIconsite() {

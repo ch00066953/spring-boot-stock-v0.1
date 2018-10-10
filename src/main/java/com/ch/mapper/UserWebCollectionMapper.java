@@ -10,7 +10,7 @@ public interface UserWebCollectionMapper {
 
     int deleteByExample(UserWebCollectionExample example);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(UserWebCollection record);
 
@@ -18,7 +18,7 @@ public interface UserWebCollectionMapper {
 
     List<UserWebCollection> selectByExample(UserWebCollectionExample example);
 
-    UserWebCollection selectByPrimaryKey(String id);
+    UserWebCollection selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") UserWebCollection record, @Param("example") UserWebCollectionExample example);
 

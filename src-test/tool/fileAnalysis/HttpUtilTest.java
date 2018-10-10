@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import com.ch.service.webcrawler.HttpUtil;
+
 public class HttpUtilTest {
 
 	@Test
@@ -61,13 +63,13 @@ public class HttpUtilTest {
 	@Test
 	public void testDownLoadIpProxy() throws IOException {
 		HttpUtil hu = new HttpUtil();
-		hu.downLoadIpProxy();
+		//hu.downLoadIpProxy();
 	}
 
 	@Test
 	public void testInitIpProxy() throws Exception {
 		HttpUtil hu = new HttpUtil();
-		hu.initIpProxy();
+		//hu.initIpProxy();
 	}
 
 }

@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layouts">
+<head th:include="layouts :: htmlhead" th:with="title='home'">
+
+</head>
+<body>
+	<section layout:fragment="contentf">
+		<div th:replace="pages/fragments/stock-growth :: stock-growth">jq_datatable</div>
+		
+	</section>
+	
+	<section layout:fragment="script">
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+       <script th:src="@{/js/stock/growth.js}"></script>
+	</section>
+	
+</body>
+</html>

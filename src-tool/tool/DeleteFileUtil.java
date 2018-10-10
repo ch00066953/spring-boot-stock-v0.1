@@ -100,17 +100,17 @@ public class DeleteFileUtil {
     }
 
     public static void main(String[] args) {
-//  // 删除单个文件
-//  String file = "c:/test/test.txt";
-//  DeleteFileUtil.deleteFile(file);
-//  System.out.println();
-        // 删除一个目录
-        String dir = "E:\\stock\\allmarket_wy\\main\\600535.csv";
-//        DeleteFileUtil.deleteDirectory(dir);
-//  System.out.println();
-//  // 删除文件
-//  dir = "c:/test/test0";
-  DeleteFileUtil.delete(dir);
+		//  // 删除单个文件
+		//  String file = "c:/test/test.txt";
+		//  DeleteFileUtil.deleteFile(file);
+		//  System.out.println();
+		        // 删除一个目录
+		        String dir = "E:\\stock\\allmarket_wy\\main\\600535.csv";
+		//        DeleteFileUtil.deleteDirectory(dir);
+		//  System.out.println();
+		//  // 删除文件
+		//  dir = "c:/test/test0";
+		  DeleteFileUtil.delete(dir);
 
     }
 

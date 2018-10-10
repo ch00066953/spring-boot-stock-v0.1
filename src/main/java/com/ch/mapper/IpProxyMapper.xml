@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ch.mapper.IpProxyMapper">
+  <resultMap id="BaseResultMap" type="com.ch.pojo.IpProxy">
+    <id column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="port" jdbcType="VARCHAR" property="port" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="anonymity" jdbcType="VARCHAR" property="anonymity" />
+    <result column="belong" jdbcType="VARCHAR" property="belong" />
+    <result column="Operator" jdbcType="VARCHAR" property="operator" />
+    <result column="speed" jdbcType="VARCHAR" property="speed" />
+    <result column="prooftime" jdbcType="VARCHAR" property="prooftime" />
+    <result column="fristtime" jdbcType="VARCHAR" property="fristtime" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ip, port, type, anonymity, belong, Operator, speed, prooftime, fristtime, status
+  </sql>
+  <select id="selectByExample" parameterType="com.ch.pojo.IpProxyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ip_proxy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ip_proxy
+    where ip = #{ip,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ip_proxy
+    where ip = #{ip,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ch.pojo.IpProxyExample">
+    delete from ip_proxy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ch.pojo.IpProxy">
+    insert into ip_proxy (ip, port, type, 
+      anonymity, belong, Operator, 
+      speed, prooftime, fristtime, 
+      status)
+    values (#{ip,jdbcType=VARCHAR}, #{port,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{anonymity,jdbcType=VARCHAR}, #{belong,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, 
+      #{speed,jdbcType=VARCHAR}, #{prooftime,jdbcType=VARCHAR}, #{fristtime,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ch.pojo.IpProxy">
+    insert into ip_proxy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="port != null">
+        port,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="anonymity != null">
+        anonymity,
+      </if>
+      <if test="belong != null">
+        belong,
+      </if>
+      <if test="operator != null">
+        Operator,
+      </if>
+      <if test="speed != null">
+        speed,
+      </if>
+      <if test="prooftime != null">
+        prooftime,
+      </if>
+      <if test="fristtime != null">
+        fristtime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null">
+        #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymity != null">
+        #{anonymity,jdbcType=VARCHAR},
+      </if>
+      <if test="belong != null">
+        #{belong,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null">
+        #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="prooftime != null">
+        #{prooftime,jdbcType=VARCHAR},
+      </if>
+      <if test="fristtime != null">
+        #{fristtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ch.pojo.IpProxyExample" resultType="java.lang.Integer">
+    select count(*) from ip_proxy
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ip_proxy
+    <set>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.port != null">
+        port = #{record.port,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anonymity != null">
+        anonymity = #{record.anonymity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.belong != null">
+        belong = #{record.belong,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operator != null">
+        Operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.speed != null">
+        speed = #{record.speed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prooftime != null">
+        prooftime = #{record.prooftime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fristtime != null">
+        fristtime = #{record.fristtime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ip_proxy
+    set ip = #{record.ip,jdbcType=VARCHAR},
+      port = #{record.port,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      anonymity = #{record.anonymity,jdbcType=VARCHAR},
+      belong = #{record.belong,jdbcType=VARCHAR},
+      Operator = #{record.operator,jdbcType=VARCHAR},
+      speed = #{record.speed,jdbcType=VARCHAR},
+      prooftime = #{record.prooftime,jdbcType=VARCHAR},
+      fristtime = #{record.fristtime,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ch.pojo.IpProxy">
+    update ip_proxy
+    <set>
+      <if test="port != null">
+        port = #{port,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="anonymity != null">
+        anonymity = #{anonymity,jdbcType=VARCHAR},
+      </if>
+      <if test="belong != null">
+        belong = #{belong,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        Operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="speed != null">
+        speed = #{speed,jdbcType=VARCHAR},
+      </if>
+      <if test="prooftime != null">
+        prooftime = #{prooftime,jdbcType=VARCHAR},
+      </if>
+      <if test="fristtime != null">
+        fristtime = #{fristtime,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ip = #{ip,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ch.pojo.IpProxy">
+    update ip_proxy
+    set port = #{port,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      anonymity = #{anonymity,jdbcType=VARCHAR},
+      belong = #{belong,jdbcType=VARCHAR},
+      Operator = #{operator,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=VARCHAR},
+      prooftime = #{prooftime,jdbcType=VARCHAR},
+      fristtime = #{fristtime,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR}
+    where ip = #{ip,jdbcType=VARCHAR}
+  </update>
+</mapper>

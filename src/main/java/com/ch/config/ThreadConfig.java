@@ -18,7 +18,7 @@ public class ThreadConfig  {
           executor = new ThreadPoolTaskExecutor();  
           executor.setCorePoolSize(8);  
           executor.setMaxPoolSize(40);  
-          executor.setQueueCapacity(50); 
+          executor.setQueueCapacity(100); 
           executor.initialize();  
           return executor;  
      }  
@@ -30,4 +30,7 @@ public class ThreadConfig  {
      private void getC() {
     	 executor.getCorePoolSize();
 	}
+     private void getA() {
+    	 executor.getActiveCount();
+     }
 }  

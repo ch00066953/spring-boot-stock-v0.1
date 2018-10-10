@@ -16,7 +16,7 @@ public class IndexController {
     @RequestMapping("/index")
 	public String index(Locale locale, Model model) {
 
-		return "index";
+		return "home";
 	}
     
 

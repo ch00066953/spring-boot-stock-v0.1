@@ -30,6 +30,7 @@ public class EReport extends TableBean{
 	}
 	public EReport(String sPath) {
 		 try {
+			 log.info(sPath);
 			getReport(sPath);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

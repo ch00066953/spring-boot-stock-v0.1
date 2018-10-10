@@ -130,7 +130,7 @@ public class Replace {
 	public static Map<String, String> initRMap(String ...stock) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("today", DateUtil.getToday());
-		map.put("time", DateUtil.getNowTime("HH:mm"));
+		map.put("time", DateUtil.getNowTime("HH_mm_ss"));
 		if(stock != null && stock.length != 0 && !StringX.isEmpty(stock[0])){
 			if (stock[0].startsWith("6"))
 				map.put("stockall", stock[0]+".ss");

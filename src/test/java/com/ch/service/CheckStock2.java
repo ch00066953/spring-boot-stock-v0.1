@@ -14,8 +14,6 @@ import download.PathMap;
 import tool.DownLoad;
 import tool.fileAnalysis.XlsxReader;
 
-
-@Service
 public class CheckStock2 {
 	
 	@Autowired

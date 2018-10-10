@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.ch.config.ThreadConfig;
 import com.ch.mapper.StockInfoMapper;
 import com.ch.pojo.StockInfo;
+import com.ch.service.webcrawler.HttpUtil;
 
 import download.Path;
 import download.PathImpl;
@@ -93,27 +94,61 @@ public class PESerialCalcTest {
 	public void testdownLoad() throws Exception {
 		int i = 0;
 		int k = 0;
+		int a = 0;
+		HttpUtil.setIsproxy(false);
 		for(StockInfo s : StockInfoMapper.selectByExample(null)){
 			log.info(s.getId()+"-------------------");
 			PESerialCalc.downLoad(s.getId()); 
 			Thread.sleep(100);
 			i = ThreadConfig.seeExecutor().getPoolSize();
 			k = ThreadConfig.seeExecutor().getCorePoolSize();
-			log.info(i+"池内数量,"+k+"核心数");
+			a = ThreadConfig.seeExecutor().getActiveCount();
+			log.info(i+"池内数量,"+k+"核心数,"+a+"活跃数,");
+			log.info(ThreadConfig.seeExecutor().getThreadPoolExecutor().toString());
 			if(i >= 20){
-				Thread.sleep(i*i);
+				for(;ThreadConfig.seeExecutor().getActiveCount() > 20;)
+					Thread.sleep(i*i);
 			}
 		}
 		for(int j = 0; i>0 && j < 10;j++){
 			i = ThreadConfig.seeExecutor().getPoolSize();
 			k = ThreadConfig.seeExecutor().getCorePoolSize();
-			log.info(i+"池内数量,"+k+"核心数,"+j+"结束倒记");
+			a = ThreadConfig.seeExecutor().getActiveCount();
+			log.info(i+"池内数量,"+k+"核心数,"+a+"活跃数,"+j+"结束倒记");
+			Thread.sleep(10000);
+		}
+	}
+	@Test
+	public void testdownLoadAsync() throws Exception {
+		int i = 0;
+		int k = 0;
+		int a = 0;
+		for(StockInfo s : StockInfoMapper.selectByExample(null)){
+			log.info(s.getId()+"-------------------");
+			PESerialCalc.downLoadAsync(s.getId()); 
+			Thread.sleep(100);
+			i = ThreadConfig.seeExecutor().getPoolSize();
+			k = ThreadConfig.seeExecutor().getCorePoolSize();
+			a = ThreadConfig.seeExecutor().getActiveCount();
+			log.info(i+"池内数量,"+k+"核心数,"+a+"活跃数,");
+			log.info(ThreadConfig.seeExecutor().getThreadPoolExecutor().toString());
+			if(i >= 20){
+				for(;ThreadConfig.seeExecutor().getActiveCount() > 20;)
+					Thread.sleep(i*i);
+			}
+		}
+		for(int j = 0; i>0 && j < 10;j++){
+			i = ThreadConfig.seeExecutor().getPoolSize();
+			k = ThreadConfig.seeExecutor().getCorePoolSize();
+			a = ThreadConfig.seeExecutor().getActiveCount();
+			log.info(i+"池内数量,"+k+"核心数,"+a+"活跃数,"+j+"结束倒记");
 			Thread.sleep(10000);
 		}
 	}
 
 	@Test
 	public void testdownLoad1() throws Exception {
+		HttpUtil.setIsproxy(false);
 		String stock = "300070";
 		log.info(stock + "-------------------");
 		PESerialCalc.downLoad(stock);

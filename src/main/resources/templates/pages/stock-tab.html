@@ -1,0 +1,114 @@
+﻿<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layouts">
+<head th:include="layouts :: htmlhead" th:with="title='stock'">
+
+</head>
+<body>
+<section layout:fragment="contentf">
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="card">
+			 	<div class="header">
+					<h2  th:text="*{stockname}">stockname </h2>
+					<ul class="header-dropdown m-r--5">
+						<li class="dropdown">
+							<a href="javascript:void(0);"
+								class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-haspopup="true" aria-expanded="false"> 
+								<i class="material-icons">more_vert</i>
+							</a>
+							<ul class="dropdown-menu pull-right">
+								<li><a th:href="@{http://basic.10jqka.com.cn/{stockid}/(stockid = ${stockid})}" target="_blank">同花顺F10</a></li>
+								<li><a th:href="@{https://xueqiu.com/S/{stockhead}{stockid}/(stockid = ${stockid},stockhead = ${stockhead})}" target="_blank">雪球论坛</a></li>
+								<li><a th:href="@{http://app.finance.ifeng.com/data/stock/tab_cwzb.php?symbol={stockid}(stockid = ${stockid})}" target="_blank">凤凰财经</a></li>
+							</ul></li>
+					</ul>
+				</div>
+				<div class="body">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tab-nav-right" role="tablist">
+                        <li role="presentation" class="active"><a href="#peg" data-toggle="tab" aria-expanded="true">性价比</a></li>
+                        <li role="presentation" class=""><a href="#growth" data-toggle="tab" aria-expanded="false">护城河</a></li>
+                        <li role="presentation" class=""><a href="#messages" data-toggle="tab" aria-expanded="false">成长性</a></li>
+                        <li role="presentation" class=""><a href="#setting" data-toggle="tab" aria-expanded="false">安全性</a></li>
+                        <li role="presentation" class=""><a href="#timing" data-toggle="tab" aria-expanded="false">时机判断</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="peg">
+                            <!-- <b>性价比</b>
+                            
+                            <p>
+                           		根据成长性和估值来判断该股性价比
+                            </p> -->
+                            <b>根据成长性和估值来判断该股性价比</b>
+                            <hr>
+
+						    <div id="echart"style="height:300px;width:100%;">  </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="growth">
+                            <b>成长性</b>
+                            <!-- <p>
+                            </p> -->
+                            <hr>
+	   						<div th:replace="pages/fragments/stock-datatable :: stock-pegs-table">jq_datatable</div>
+	   						<div th:replace="pages/fragments/stock-growth :: stock-growth-canvas">jq_datatable</div>
+	   						
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="messages">
+                            <b>Message Content</b>
+                            <p>
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="setting">
+                            <b>Settings Content</b>
+                            <p>
+                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                                sadipscing mel.
+                            </p>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="timing">
+                            <b>timing Content</b>
+                            <p>
+                                Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
+                                Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
+                                pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
+                                sadipscing mel.
+                            </p>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+	
+<section layout:fragment="script">
+	<script th:src="@{/js/stock/stock.js}"></script>
+	
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script th:src="@{/js/stock/growth.js}"></script>
+    <script type="text/javascript">
+    	/* $('a[href="#growth"]').click(function (e) {  
+	        myChart.resize();  
+	    }); */
+    	
+	    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {  
+	    	myChart.resize(); 
+	    	echarts.resize(); 
+	    });
+    </script>
+</section>
+	
+</body>
+</html>

@@ -2,7 +2,6 @@ package tool;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,26 +10,40 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Map;
 
-import tool.fileAnalysis.HttpUtil;
-import tool.rep.Replace;
+import com.ch.service.webcrawler.HttpUtil;
 
 import download.Path;
 import download.PathMap;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 下载
  * @author lgwang
  *
  */
+@Slf4j
 public class DownLoad {
+	
+	private static boolean IsEmpty(String pathname) {
+		File f = new File(pathname);
+		if(f.exists()){
+			if(f.length()>0)
+				return true;
+			else
+				DeleteFileUtil.deleteFile(pathname);
+		}
+		
+		return false;
+
+	}
 	
 	public static void downLoanPath(String id,Map<String, String> map) throws IOException {
 
 		PathMap pm = new PathMap();
 		Path p = pm.getPath(id);
 		p.setReMap(map);
-		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())&&IsEmpty(p.getM())){
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
@@ -40,8 +53,8 @@ public class DownLoad {
 	public static void downLoanPath(Path p,Map<String, String> map) throws IOException {
 		
 		p.setReMap(map);
-		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())&&IsEmpty(p.getM())){
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
@@ -50,8 +63,8 @@ public class DownLoad {
 	
 	public static void downLoanPath(Path p) throws IOException {
 		
-		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())&&IsEmpty(p.getM())){
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
@@ -63,8 +76,8 @@ public class DownLoad {
 		PathMap pm = new PathMap();
 		Path p = pm.getPath(id);
 		p.setReMap(stock);
-		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())&&IsEmpty(p.getM())){
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
@@ -76,8 +89,8 @@ public class DownLoad {
 		PathMap pm = new PathMap();
 		Path p = pm.getPath(id);
 		p.setReMap(stock);
-		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())&&IsEmpty(p.getM())){
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile2(p.getU(),headerMap,p.getM(),p.getD());
@@ -87,8 +100,8 @@ public class DownLoad {
 	public static void downLoanPath(Path p,String stock) throws IOException {
 		
 		p.setReMap(stock);
-		if(new File(p.getD()).exists()&&new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())&&IsEmpty(p.getM())){
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
@@ -100,7 +113,7 @@ public class DownLoad {
 		p.setReMap(stock);
 		File f = new File(p.getM());
 		if(f.exists() || f.length() > 0){
-			System.out.println("exists");
+			log.info("exists");
 			return;
 		}
 		HttpUtil.downloadFile(p.getU(),p.getM(),p.getD());
@@ -154,28 +167,29 @@ public class DownLoad {
 		//如果文件夹不存在则创建    
 		if  (!file .isDirectory())      
 		{       
-		    System.out.println("//不存在");  
+		    log.info("//不存在");  
 		    file.mkdirs();    
-		    System.out.println("//创建+"+file);
+		    log.info("//创建+"+file);
 		} else   
 		{  
-		    System.out.println("//目录存在");  
+		    log.info("//目录存在");  
 		}  
 	}
 	
 	public static void delete(Path p,Map<String, String> map) {
 		p.setReMap(map);
-		if(new File(p.getD()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getD())){
+			log.info("exists");
 			DeleteFileUtil.deleteFile(p.getD());
 		}
-		if(new File(p.getM()).exists()){
-			System.out.println("exists");
+		if(IsEmpty(p.getM())){
+			log.info("exists");
 			DeleteFileUtil.deleteFile(p.getM());
 		}
 
 	}
 	public static void main(String[] args) {
-		tool.DownLoad.createPath("E:\\stock\\20150115\\MAINREPORT");
+		
+		log.info(String.valueOf(tool.DownLoad.IsEmpty("E:\\stock\\equity\\main\\000061_equity.html")));
 	}
 }

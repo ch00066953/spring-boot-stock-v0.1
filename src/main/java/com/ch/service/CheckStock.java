@@ -20,7 +20,11 @@ import tool.StringX;
 import tool.fileAnalysis.XlsReader;
 import tool.fileAnalysis.XlsxReader;
 
-
+/**
+ * 将股票代码导入stock_info
+ * @author admin
+ *
+ */
 @Slf4j
 @Service
 @Transactional

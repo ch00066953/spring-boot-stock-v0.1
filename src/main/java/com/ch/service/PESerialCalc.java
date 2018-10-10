@@ -122,8 +122,8 @@ public class PESerialCalc {
 		else
 			m.put("hstype","1");
 		m.put("stock",stock);
-		m.put("begindate","2000/01/01");
-		m.put("enddate",DateUtil.getToday());
+		m.put("begindate","20000101");
+		m.put("enddate",DateUtil.getToday(""));
 		m.put("row","TCLOSE;HIGH;LOW;TOPEN;LCLOSE;CHG;PCHG;TURNOVER;VOTURNOVER;VATURNOVER;TCAP;MCAP");
 		p.setReMap(m);
 		return p;
@@ -184,6 +184,9 @@ public class PESerialCalc {
 	}
 
 	@Async
+	public void downLoadAsync(String stock) throws Exception {
+		downLoad(stock);
+	}
 	public void downLoad(String stock) throws Exception {
 		StopWatch sw = new StopWatch();
 		sw.start();

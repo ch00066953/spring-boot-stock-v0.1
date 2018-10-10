@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 
 import download.Path;
 
+/**
+ * 获取文本信息
+ * @author admin
+ *
+ */
 @Component
 public class HttpCellReader {
 
