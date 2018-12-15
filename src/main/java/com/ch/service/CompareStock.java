@@ -134,7 +134,15 @@ public class CompareStock {
 		
 		Path p = PathMap.getPath("mainreport");
 		p.setReMap(stock.getId());
-		EReport er = new EReport(p.getM());
+		EReport er = null;
+		try{
+			er = new EReport(p.getM());
+		}catch(Exception e){
+			tb.add("0");
+			tb.add("0");
+			return;
+		}
+		
 		List<Double> l = new ArrayList<>();
 		for(int i = 1; er.getYearNo(i) !=0 && i <= 5; i ++){
 			r = er.getCell("净利润同比增长率", er.getYearNo(i));

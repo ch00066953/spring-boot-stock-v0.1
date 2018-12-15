@@ -81,7 +81,7 @@ public class DateUtil {
 	}
 
 	public static String getRelativeDate(String sDate, int iYear, int iMonth, int iDate, String sFormat) {
-		if (sDate == null)
+		if (StringX.isEmpty(sDate))
 			return null;
 		DateTime dt = DateTime.parse(sDate);
 		dt = dt.plusYears(iYear);

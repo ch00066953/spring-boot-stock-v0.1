@@ -30,7 +30,7 @@ public class CompareStockTest {
 	public void testCompare() throws Exception {
 		Criteria criteria = example.createCriteria();
 //		criteria.andIndustry2EqualTo("环保工程");
-		criteria.andIdEqualTo("002450");
+		criteria.andIdEqualTo("000063");
 		CompareStock.setExample(example);;
 		TableBean tb = CompareStock.compare();
 		for(Map<String, String> m : tb.getList()){

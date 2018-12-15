@@ -58,7 +58,7 @@ public class PESerialCalcTest {
 
 	@Test
 	public void testRunFAll() throws Exception {
-		PESerialCalc calc = new PESerialCalc("300070");
+		PESerialCalc calc = new PESerialCalc("002706");
 		calc.netWorth(); 
 		calc.runFAll();
 	}

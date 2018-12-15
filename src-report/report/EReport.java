@@ -35,6 +35,7 @@ public class EReport extends TableBean{
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (BiffException e) {
+//			log.error(sPath+","+e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -125,6 +126,8 @@ public class EReport extends TableBean{
 		i -= 1;
 		i = -i;
 		String year = DateUtil.getRelativeDate(sFristY, i, 0, 0,"YYYY-MM-dd");
+		if(StringX.isEmpty(year))
+			return 0;
 		int yearNo = getCol(year);
 		if (yearNo > colno.size())
 			return 0;
